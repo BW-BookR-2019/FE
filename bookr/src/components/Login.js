@@ -27,7 +27,7 @@ const Register = ({touched, errors}) => {
 						type='text'
 						name='email'
 						placeholder='Email'
-						onChange={handleChanges}
+						// onChange={handleChanges}
 						/>
 						{touched.email && errors.email &&
 							<p className='error'>{errors.email}</p>
@@ -38,7 +38,7 @@ const Register = ({touched, errors}) => {
 						type='password'
 						name='password'
 						placeholder='Password'
-						onChange={handleChanges}
+						// onChange={handleChanges}
 						/>
 						{touched.password && errors.password &&
 							<p className='error'>{errors.password}</p>
