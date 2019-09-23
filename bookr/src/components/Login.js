@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { withFormik, Form, Field } from 'formik';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import * as Yup from 'yup'
+import * as Yup from 'yup';
+import TextField from '@material-ui/core/TextField';
 
 
-const Register = ({touched, errors}) => {
+const Login = ({touched, errors}) => {
 	// STYLING
 
 	// BUILDING FORM
@@ -14,6 +15,7 @@ const Register = ({touched, errors}) => {
 	const handleChanges = e => {
 		setUser({...user, [e.target.name]:e.target.value})
 	}
+	
 
   return(
 		<>
@@ -23,11 +25,11 @@ const Register = ({touched, errors}) => {
 				<Form>
 					<label className='textContainer'>
 						Email
-						<Field
+						<TextField
 						type='text'
 						name='email'
-						placeholder='Email'
-						// onChange={handleChanges}
+						variant="outlined"
+						margin='dense'
 						/>
 						{touched.email && errors.email &&
 							<p className='error'>{errors.email}</p>
@@ -55,7 +57,7 @@ const Register = ({touched, errors}) => {
 	)
 }
 
-const FormikRegister = withFormik({
+const FormikLogin = withFormik({
 	mapPropsToValues({email, password}
 	) {
 			return {
@@ -78,6 +80,6 @@ const FormikRegister = withFormik({
 		})
 		.catch(error => console.log('Error in axios', error.response))
 	}
-})(Register);
+})(Login);
 
-export default FormikRegister;
+export default FormikLogin;
