@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { withFormik, Form, Field } from 'formik';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -6,6 +6,14 @@ import * as Yup from 'yup'
 
 
 const Register = ({touched, errors}) => {
+	// STYLING
+
+	// BUILDING FORM
+	
+	const [user, setUser] = useState({name: '', email: '', password: ''});
+	const handleChanges = e => {
+		setUser({...user, [e.target.name]:e.target.value})
+	}
 
   return(
 		<>
@@ -19,6 +27,7 @@ const Register = ({touched, errors}) => {
 						type='text'
 						name='name'
 						placeholder='Name'
+						onChange={handleChanges}
 						/>
 						{touched.name && errors.name &&
 							<p className='error'>{errors.name}</p>
@@ -29,6 +38,7 @@ const Register = ({touched, errors}) => {
 						type='text'
 						name='email'
 						placeholder='Email'
+						onChange={handleChanges}
 						/>
 						{touched.email && errors.email &&
 							<p className='error'>{errors.email}</p>
@@ -39,6 +49,7 @@ const Register = ({touched, errors}) => {
 						type='password'
 						name='password'
 						placeholder='Password'
+						onChange={handleChanges}
 						/>
 						{touched.password && errors.password &&
 							<p className='error'>{errors.password}</p>
