@@ -3,6 +3,8 @@ import './App.css';
 import {Route, Link} from 'react-router-dom'
 import BookList from './components/BookList'
 import BookPage from './components/BookPage'
+import Register from './components/Register'
+import Login from './components/Login'
 
 function App() {
   return (
