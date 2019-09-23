@@ -14,7 +14,7 @@ function App() {
 
 
      <div>
-       <Route path="/book-list" component={BookList}/>
+       <Route exact path="/book-list" component={BookList}/>
        <Route path="/book-list/:id" component={BookPage} />
       </div>
     </div>
