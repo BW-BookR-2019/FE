@@ -14,8 +14,11 @@ function App() {
     <div className='App'>
       <Link to='/book-list'>Book Selection</Link>
       <div>
-        <PrivateRoute exact path='/book-list' component={BookList} />
+        {/* <PrivateRoute exact path='/book-list' component={BookList} />
         <PrivateRoute path='/book-list/:id' component={BookPage} />
+        <PrivateRoute path='/add-review/:id' component={AddReviewForm} /> */}
+        <Route exact path='/book-list' component={BookList} />
+        <Route path='/book-list/:id' component={BookPage} />
         <Route path='/add-review/:id' component={AddReviewForm} />
         <Route path='/register' component={Register} />
         <Route path='/login' component={Login} />
