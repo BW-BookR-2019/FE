@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { withFormik, Form, Field } from 'formik';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -6,12 +6,6 @@ import * as Yup from 'yup'
 
 
 const Register = ({touched, errors}) => {
-	// const [newUser, setNewUser] = useState([]);
-	// useEffect(() => {
-	// 	if(status){
-	// 		setNewUser([...newUser, status]);
-	// 	}
-	// }, [status])
 
   return(
 		<>
@@ -29,21 +23,30 @@ const Register = ({touched, errors}) => {
 						{touched.name && errors.name &&
 							<p className='error'>{errors.name}</p>
 						}
+
 						Email
 						<Field
 						type='text'
 						name='email'
 						placeholder='Email'
 						/>
+						{touched.email && errors.email &&
+							<p className='error'>{errors.email}</p>
+						}
+
 						Password
 						<Field
-						type='text'
+						type='password'
 						name='password'
 						placeholder='Password'
 						/>
+						{touched.password && errors.password &&
+							<p className='error'>{errors.password}</p>
+						}
+
 					</label>
 					<label className='submit-button'>
-						<button type='submit'>Register</button>
+						<button type='submit'>register</button>
 					</label>
 					<Link to='/login'>already have an account? click to login</Link>
 				</Form>
