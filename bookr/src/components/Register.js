@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { withFormik, Form, Field } from 'formik';
+import { withFormik, Form } from 'formik';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import * as Yup from 'yup'
+import TextField from '@material-ui/core/TextField'
+import { makeStyles } from '@material-ui/core/styles'
 
 
 const Register = ({touched, errors}) => {
@@ -23,10 +25,13 @@ const Register = ({touched, errors}) => {
 				<Form>
 					<label className='textContainer'>
 						Name 
-						<Field
+						<TextField
 						type='text'
 						name='name'
-						placeholder='Name'
+						// ADDED OUTLINE VARIANT FROM MATERIAL UI
+						variant="outlined"
+						// MADE INPUT FIELD DENSE USING MATERIAL UI
+						margin='dense'
 						// onChange={handleChanges}
 						/>
 						{touched.name && errors.name &&
@@ -34,10 +39,11 @@ const Register = ({touched, errors}) => {
 						}
 
 						Email
-						<Field
+						<TextField
 						type='text'
 						name='email'
-						placeholder='Email'
+						variant="outlined"
+						margin='dense'
 						// onChange={handleChanges}
 						/>
 						{touched.email && errors.email &&
@@ -45,10 +51,11 @@ const Register = ({touched, errors}) => {
 						}
 
 						Password
-						<Field
+						<TextField
 						type='password'
 						name='password'
-						placeholder='Password'
+						variant="outlined"
+						margin='dense'
 						// onChange={handleChanges}
 						/>
 						{touched.password && errors.password &&
