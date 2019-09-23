@@ -1,13 +1,13 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import {Route} from 'react-router-dom'
+import {Route, Link} from 'react-router-dom'
 import BookList from './components/BookList'
 import BookPage from './components/BookPage'
 
 function App() {
   return (
     <div className="App">
+      <Link to="/book-list">Book Selection</Link>
      
 
 
@@ -16,7 +16,6 @@ function App() {
      <div>
        <Route path="/book-list" component={BookList}/>
        <Route path="/book-list/:id" component={BookPage} />
-
       </div>
     </div>
   );
