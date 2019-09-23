@@ -1,13 +1,14 @@
 import React from 'react'
+import {Route, Link} from "react-router-dom"
 
-function BookPage () {
+function BookPage (props) {
 
 
      return(
           <div>
                {/* Block for book cover + general info */}
 
-               <div>
+               {/* <div>
                     <div>
                          <img />     
                          <p>Ratings: </p>
@@ -20,7 +21,7 @@ function BookPage () {
                          <button>Add To My Books</button>>
                          <button>Purchase</button>>
                     </div>
-               </div>
+               </div> */}
 
                {/* Block for description of book  */}
                <div>

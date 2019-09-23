@@ -1,31 +1,46 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
+import {Link} from 'react-router-dom'
+import axios from 'axios'
 
 function BookList (props){
 
-     // const [bookData, setBookData] = useState([])
+     const [bookData, setBookData] = useState([])
 
-     // useEffect( () => {
-     //      axios
-     //           .get('https://www.directtextbook.com/api')
-     //      .then(response => {
-     //           console.log(response)
-     //           setBookData(response)
-     //      })
-     // },[])
-
-
+     useEffect( () => {
+          axios
+               .get('https://www.googleapis.com/books/v1/volumes?q=REACT')
+          .then(response => {
+               const data = response.data.items;
+               console.log(data)
+               setBookData(data);
+          })
+     },[])
 
 
      return(
           <div>
-               Hello this is the book list 
+               {
+                    bookData.map(item => (
+                         <div key={item.id}>
+                              <Link to={`/book-list/${item.id}`}>
+                                   <img src={item.volumeInfo.imageLinks.thumbnail} />
+                                   <h3>{item.volumeInfo.title}</h3>
+                              </Link>
+                              <p>{item.volumeInfo.subtitle}</p>
+                              <p>{item.volumeInfo.publishedDate}</p>
+                              <p>{item.volumeInfo.averageRating}</p>
+                         </div>
+                       
+                    ))
+               }
 
-          <div>
+
+          {/* <div>
                <img />
                <p>Rating:</p>
                <p>Price:</p>
                <p>Description</p>
-          </div>
+          </div> */}
           {/* {
                bookData.map(item => {
 
