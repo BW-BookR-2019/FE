@@ -4,8 +4,10 @@ import ReactHtmlParser from 'react-html-parser';
 
 function BookPage (props) {
 
+     // * Grabbing dynamic URL id
      let id = props.match.params.id
 
+     // * State values for book data, author, and image respectively
      const [bookData, setBookData] = useState([])
      const [bookAuthor, setBookAuthor] = useState([])
      const [bookCover, setBookCover] = useState('')
@@ -22,7 +24,7 @@ function BookPage (props) {
                })
      }, [id])
 
-   
+     // * Needed to create a new state to parse book description
      const description = bookData.description
 
 
