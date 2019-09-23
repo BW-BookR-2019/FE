@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
+import Ratings from 'react-ratings-declarative';
+
 
 
 
@@ -10,7 +12,7 @@ function BookList (props){
 
      useEffect( () => {
           axios
-               .get('https://www.googleapis.com/books/v1/volumes?q=REACT')
+               .get('https://www.googleapis.com/books/v1/volumes?q=CODING')
           .then(response => {
                const data = response.data.items;
                console.log(data)
@@ -30,7 +32,18 @@ function BookList (props){
                               </Link>
                               <p>{item.volumeInfo.subtitle}</p>
                               <p>{item.volumeInfo.publishedDate}</p>
-                              <p>{item.volumeInfo.averageRating}</p>
+                                 <Ratings
+                                   rating={4}
+                                   // rating={item.volumeInfo.averageRating}
+                                   widgetDimensions="25px"
+                                   widgetSpacings="1px"
+                              >
+                                   <Ratings.Widget widgetRatedColor="gold" />
+                                   <Ratings.Widget widgetRatedColor="gold" />
+                                   <Ratings.Widget widgetRatedColor="gold" />
+                                   <Ratings.Widget widgetRatedColor="gold" />
+                                   <Ratings.Widget widgetRatedColor="gold" />
+                              </Ratings>
                          </div>
                     ))
                }

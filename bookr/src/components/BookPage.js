@@ -8,15 +8,17 @@ function BookPage (props) {
 
      const [bookData, setBookData] = useState([])
      const [bookAuthor, setBookAuthor] = useState([])
+     const [bookCover, setBookCover] = useState('')
 
      useEffect(() => {
           axios
                .get(`https://www.googleapis.com/books/v1/volumes/${id}`)
                .then(response => {
-                    console.log(response.data.volumeInfo.authors)
+                    console.log(response.data.volumeInfo)
                     const data = response.data.volumeInfo
                     setBookData(data)
                     setBookAuthor(response.data.volumeInfo.authors)
+                    setBookCover(response.data.volumeInfo.imageLinks.thumbnail)
                })
      }, [id])
 
@@ -26,20 +28,24 @@ function BookPage (props) {
 
      return(
           <div>
-                         <div>
-                              <div>
-                                   <p>Ratings: </p>
-                              </div>
-
-                              <div>
-                                   <h3>{bookData.title}</h3>
-                                   <h4>{bookData.subtitle}</h4>
-                                   <p>{bookData.publisher}</p>
-                                   <div>{bookAuthor.map(item => (<p key={item}>{item}</p>))}</div>
-                                   <button>Add To My Books</button>
-                              <button>Purchase</button>
-                              </div>
-                         </div>
+               <div>
+                    <div>
+                         <img src={bookCover} />
+                         <p>Ratings: </p>
+                    </div>
+                     <div>
+                          <h3>{bookData.title}</h3>
+                          <h4>{bookData.subtitle}</h4>
+                          <p>{bookData.publisher}</p>
+                          <div>
+                              {bookAuthor.map(item => (
+                              <p key={item}>{item}</p>
+                              ))}
+                          </div>
+                          <button>Add To My Books</button>
+                          <button>Purchase</button>
+                     </div>
+                </div>
  
                <div>
                    { ReactHtmlParser(description) } 
