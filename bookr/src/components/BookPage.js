@@ -30,7 +30,7 @@ function BookPage (props) {
           <div>
                <div>
                     <div>
-                         <img src={bookCover} />
+                         <img src={bookCover} alt="book cover"/>
                          <p>Ratings: </p>
                     </div>
                      <div>
