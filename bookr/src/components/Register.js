@@ -3,6 +3,8 @@ import { withFormik, Form, Field } from 'formik';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import * as Yup from 'yup';
+// WAS HAVING ISSUES WITH GETTING YUP TO WORK WITH MATERIAL UI SINCE YOU CHANGE FORMIK'S 'FIELD' TO MATERIAL UI'S 'TEXTFIELD'
+	// FOUND A GITHUB REPO THAT HELPS WITH USING FORMIK AND MATERIAL UI TOGETHER: https://github.com/stackworx/formik-material-ui
 import { TextField } from 'formik-material-ui';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -36,8 +38,10 @@ const Register = ({touched, errors}) => {
 			margin: '3%'
 		}
 	}))
+
 	// BUILDING FORM
 	const classes = useStyles();
+
 	const [user, setUser] = useState({name: '', email: '', password: ''});
 	const handleChanges = e => {
 		setUser({...user, [e.target.name]:e.target.value})
@@ -51,24 +55,20 @@ const Register = ({touched, errors}) => {
   return(
 		<>
 			<div className='register-form'>
-				{/* IMPORT FORM AND FIELD FROM FORMIK AND CREATE FORM WITH 1 FIELD AS A TEST */}
 				<Form className={classes.container}>
 					<label className='name-container' className={classes.subcontainer}>
 						name 
 						<Field
 						type='text'
 						name='name'
+						// onChange={handleChanges}	
 						component={TextField}
 						// ADDED OUTLINE VARIANT FROM MATERIAL UI
 						variant="outlined"
 						// MADE INPUT FIELD DENSE USING MATERIAL UI
 						margin='dense'
-						// onChange={handleChanges}
 						helperText={(touched.name && errors.name) && errors.name}
 						/>
-						{/* {touched.name && errors.name &&
-							<p className='error'>{errors.name}</p>
-						} */}
 					</label>
 
 					<label className='email-container' className={classes.subcontainer}>
@@ -76,15 +76,13 @@ const Register = ({touched, errors}) => {
 						<Field
 						type='text'
 						name='email'
+						// onChange={handleChanges}
 						component={TextField}
 						variant="outlined"
 						margin='dense'
-						// onChange={handleChanges}
 						helperText={(touched.email && errors.email) && errors.email}
 						/>
-						{/* {touched.email && errors.email &&
-							<p className='error'>{errors.email}</p>
-						} */}
+						
 					</label>
 
 					<label className='password-container' className={classes.subcontainer}>
@@ -92,23 +90,19 @@ const Register = ({touched, errors}) => {
 						<Field
 						type='password'
 						name='password'
+						// onChange={handleChanges}						
 						component={TextField}
 						variant="outlined"
 						margin='dense'
-						// onChange={handleChanges}
-						// helperText={(touched.password && errors.password) && errors.password}
-						helperText={touched.password ? errors.password : ''}
-						error={Boolean(errors.password)}
+						helperText={(touched.password && errors.password) && errors.password}
 						/>
-						{/* {touched.password && errors.password &&
-							<p className='error'>{errors.password}</p>
-						} */}
+		
 					</label>
 					<label className='submit-button' className={classes.items2}>
 						<Button variant='outlined' size='medium' type='submit'>register</Button>
 					</label>
 					
-					<p className={classes.items2} to='/login'>
+					<p className={classes.items2}>
 						already have an account?<br></br><Link className={classes} to='/login'> click to login</Link>
 					</p>
 				</Form>
