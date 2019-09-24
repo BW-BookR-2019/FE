@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios'
-import ReactHtmlParser from 'react-html-parser';
+// import ReactHtmlParser from 'react-html-parser';
 
 function BookPage (props) {
 
@@ -48,7 +48,7 @@ function BookPage (props) {
                 </div>
  
                <div>
-                   { ReactHtmlParser(description) } 
+                   {/* { ReactHtmlParser(description) }  */}
                </div>
           </div>
      )

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { withFormik, Form } from 'formik';
+import { withFormik, Form, Field } from 'formik';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import * as Yup from 'yup';
-import TextField from '@material-ui/core/TextField';
+import { TextField } from 'formik-material-ui';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
@@ -43,26 +43,27 @@ const Register = ({touched, errors}) => {
 		setUser({...user, [e.target.name]:e.target.value})
 	}
 
-	const handleSubmit = e => [
-		e.preventDefault,
-		setUser({...user, name:'', email:'', password:''})
-	]
+	// const submitForm = e => {
+	// 	e.preventDefault();
+	// 	setUser({name:'', email:'', password:''})
+	// }
 
   return(
 		<>
 			<div className='register-form'>
 				{/* IMPORT FORM AND FIELD FROM FORMIK AND CREATE FORM WITH 1 FIELD AS A TEST */}
-				<Form onSubmit= {handleSubmit} className={classes.container}>
+				<Form className={classes.container}>
 					<label className='name-container' className={classes.subcontainer}>
 						name 
-						<TextField
+						<Field
 						type='text'
 						name='name'
+						component={TextField}
 						// ADDED OUTLINE VARIANT FROM MATERIAL UI
 						variant="outlined"
 						// MADE INPUT FIELD DENSE USING MATERIAL UI
 						margin='dense'
-						onChange={handleChanges}
+						// onChange={handleChanges}
 						helperText={(touched.name && errors.name) && errors.name}
 						/>
 						{/* {touched.name && errors.name &&
@@ -72,12 +73,13 @@ const Register = ({touched, errors}) => {
 
 					<label className='email-container' className={classes.subcontainer}>
 						email
-						<TextField
+						<Field
 						type='text'
 						name='email'
+						component={TextField}
 						variant="outlined"
 						margin='dense'
-						onChange={handleChanges}
+						// onChange={handleChanges}
 						helperText={(touched.email && errors.email) && errors.email}
 						/>
 						{/* {touched.email && errors.email &&
@@ -87,12 +89,13 @@ const Register = ({touched, errors}) => {
 
 					<label className='password-container' className={classes.subcontainer}>
 						password
-						<TextField
+						<Field
 						type='password'
 						name='password'
+						component={TextField}
 						variant="outlined"
 						margin='dense'
-						onChange={handleChanges}
+						// onChange={handleChanges}
 						// helperText={(touched.password && errors.password) && errors.password}
 						helperText={touched.password ? errors.password : ''}
 						error={Boolean(errors.password)}

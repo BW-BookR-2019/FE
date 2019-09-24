@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { withFormik, Form, Field } from 'formik';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import * as Yup from 'yup';
-import TextField from '@material-ui/core/TextField';
+import { withFormik, Form, Field } from 'formik';
+import { TextField } from 'formik-material-ui';
 
 
 const Login = ({touched, errors}) => {
@@ -15,7 +15,6 @@ const Login = ({touched, errors}) => {
 	const handleChanges = e => {
 		setUser({...user, [e.target.name]:e.target.value})
 	}
-	
 
   return(
 		<>
@@ -25,15 +24,18 @@ const Login = ({touched, errors}) => {
 				<Form>
 					<label className='textContainer'>
 						Email
-						<TextField
+						<Field
 						type='text'
 						name='email'
+						component={TextField}
 						variant="outlined"
 						margin='dense'
-						/>
-						{touched.email && errors.email &&
+						helpertext= {touched.email && errors.email &&
 							<p className='error'>{errors.email}</p>
 						}
+						/>
+						
+						
 
 						Password
 						<Field
