@@ -1,54 +1,71 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import ReactHtmlParser from "react-html-parser";
+import React, {useEffect, useState} from 'react'
+import axios from 'axios'
+import ReactHtmlParser from 'react-html-parser';
+import Ratings from 'react-ratings-declarative';
 // import { useSelector } from 'react-redux';
 
-function BookPage(props) {
-  let id = props.match.params.id;
 
-  const [bookData, setBookData] = useState([]);
-  // const bookList = useSelector(state => state.bookList);
-  const [bookAuthor, setBookAuthor] = useState([]);
-  const [bookCover, setBookCover] = useState("");
 
-  useEffect(() => {
-    axios
-      .get(`https://www.googleapis.com/books/v1/volumes/${id}`)
-      .then(response => {
-        console.log(response.data.volumeInfo);
-        const data = response.data.volumeInfo;
-        setBookData(data);
-        setBookAuthor(response.data.volumeInfo.authors);
-        setBookCover(response.data.volumeInfo.imageLinks.thumbnail);
-      });
-  }, [id]);
+function BookPage (props) {
 
-  const description = bookData.description;
+     // * Grabbing dynamic URL id
+     let id = props.match.params.id
+       // const bookList = useSelector(state => state.bookList);
 
-  return (
-    <div>
-      <div>
-        <div>
-          <img src={bookCover} alt="book cover" />
-          <p>Ratings: </p>
-        </div>
-        <div>
-          <h3>{bookData.title}</h3>
-          <h4>{bookData.subtitle}</h4>
-          <p>{bookData.publisher}</p>
-          <div>
-            {bookAuthor.map(item => (
-              <p key={item}>{item}</p>
-            ))}
-          </div>
-          <button>Add To My Books</button>
-          <button>Purchase</button>
-        </div>
-      </div>
 
-      <div>{ReactHtmlParser(description)}</div>
-    </div>
-  );
+     // * State values for book data, author, and image respectively
+     const [bookData, setBookData] = useState([])
+     const [bookAuthor, setBookAuthor] = useState([])
+     const [bookCover, setBookCover] = useState('')
+
+     useEffect(() => {
+          axios
+               .get(`https://www.googleapis.com/books/v1/volumes/${id}`)
+               .then(response => {
+                    console.log(response.data.volumeInfo)
+                    const data = response.data.volumeInfo
+                    setBookData(data)
+                    setBookAuthor(response.data.volumeInfo.authors)
+                    setBookCover(response.data.volumeInfo.imageLinks.small || response.data.volumeInfo.imageLinks.thumbnail)
+               })
+     }, [id])
+
+     // * Needed to create a new state to parse book description
+     const description = bookData.description
+
+
+     return(
+               <div className="book-content-container">
+                    <div className="book-cover">
+                         <img src={bookCover} alt="book cover"/>
+                    </div>
+                     <div>
+                          <h3>{bookData.title}</h3>
+                          <h4>{bookData.subtitle}</h4>
+                    <p>Ratings: <Ratings
+                         rating={5}
+                         widgetDimensions="15px"
+                         widgetSpacings="1px" >
+                         <Ratings.Widget widgetRatedColor="#f3bb01" />
+                         <Ratings.Widget widgetRatedColor="#f3bb01" />
+                         <Ratings.Widget widgetRatedColor="#f3bb01" />
+                         <Ratings.Widget widgetRatedColor="#f3bb01" />
+                         <Ratings.Widget widgetRatedColor="#f3bb01" />
+                    </Ratings></p>
+                         <div>
+                              {bookAuthor.map(item => (
+                                   <p key={item}> By {item}</p>
+                              ))}
+                         </div>
+                          <button>Add To My Books</button>
+                          <button>Purchase</button>
+                          <div className="book-description">
+                              {ReactHtmlParser(description)} 
+                          </div>
+                         <p>Publisher: {bookData.publisher}</p>
+                     </div>
+                </div>
+     )
 }
 
 export default BookPage;
