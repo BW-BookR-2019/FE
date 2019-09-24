@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
-// import Ratings from 'react-ratings-declarative';
+import Ratings from 'react-ratings-declarative';
 
 
 
@@ -75,8 +75,8 @@ function BookList (props){
                               </Link>
                               <p>{item.volumeInfo.subtitle}</p>
                               <p>{item.volumeInfo.publishedDate}</p>
-                                 {/* <Ratings */}
-                                   {/* rating={item.volumeInfo.ratingsCount}
+                                 <Ratings
+                                   rating={item.volumeInfo.ratingsCount}
                                    // rating={item.volumeInfo.averageRating}
                                    widgetDimensions="25px"
                                    widgetSpacings="1px"
@@ -86,7 +86,7 @@ function BookList (props){
                                    <Ratings.Widget widgetRatedColor="gold" />
                                    <Ratings.Widget widgetRatedColor="gold" />
                                    <Ratings.Widget widgetRatedColor="gold" />
-                              </Ratings> */}
+                              </Ratings>
                          </div>
                     ))
                }
