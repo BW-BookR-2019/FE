@@ -94,7 +94,6 @@ function BookList (props){
                     <button>Get Started</button>
                </div>
           </div>
-
           </div>
      )
           }

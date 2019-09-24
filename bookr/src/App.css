@@ -79,7 +79,7 @@ nav a:hover{
 .book-list-item{
   width:18.5%;
   height:300px;
-  margin:10px .55%;
+  margin:15px .55%;
   text-align:center;
 }
 .book-list-item img{
@@ -99,6 +99,7 @@ nav a:hover{
   font-size:14px;
   margin:3px;
   opacity:0.8;
+  margin-bottom:8px;
 }
 
 .book-subtitle{
@@ -119,7 +120,7 @@ nav a:hover{
 }
 
 
-/* * Book Review styling */
+/* * Book Review Bottom-Header styling */
 .review-container{
   overflow:hidden;
   height:300px;
@@ -159,7 +160,6 @@ nav a:hover{
   max-width:1000px;
   margin:0 auto;
 
-  overflow:scroll;
   margin-top:30px;
 }
 .book-content-container h3{
@@ -188,9 +188,27 @@ nav a:hover{
   margin-right:30px;
 }
 .book-description{
-  border-top:1px solid white;
+  border-top:1px solid #f3bb01;
   margin-top:20px;
   padding:10px;
   opacity:.9;
 }
-
+.review-section{
+  max-width:1000px;
+  margin:0 auto;
+}
+.review-section p{
+  margin-top:0;
+  margin-bottom:20px;
+  margin:0 20px 25px 10px;
+}
+.review-section h2{
+  font-size:2rem;
+  color:white;
+  text-align:center;
+  border-top:1px solid #f3bb01;
+  padding-top:20px;
+}
+.review-content-section{
+  margin:0;
+}
