@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
-import { Route, Link } from 'react-router-dom';
+import { Route, NavLink } from 'react-router-dom';
+import NavLogo from './navlogo.png'
 
 import PrivateRoute from './components/PrivateRoute';
 import BookList from './components/BookList';
@@ -12,7 +13,12 @@ import AddReviewForm from './components/AddReviewForm';
 function App() {
   return (
     <div className='App'>
-      <Link to='/book-list'>Book Selection</Link>
+      <nav>
+        <img className="logo" src={NavLogo} />
+        <NavLink to='/book-list'>Book Selection</NavLink>
+      </nav>
+
+
       <div>
         {/* <PrivateRoute exact path='/book-list' component={BookList} />
         <PrivateRoute path='/book-list/:id' component={BookPage} />
@@ -23,6 +29,7 @@ function App() {
         <Route path='/register' component={Register} />
         <Route path='/login' component={Login} />
       </div>
+      
     </div>
   );
 }
