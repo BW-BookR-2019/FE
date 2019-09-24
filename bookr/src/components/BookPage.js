@@ -5,7 +5,7 @@ import Ratings from 'react-ratings-declarative';
 import reviews from '../reviewdata'
 // import { useSelector } from 'react-redux';
 
-
+import DeleteModal from './DeleteModal';
 
 function BookPage (props) {
 
@@ -44,8 +44,6 @@ function BookPage (props) {
                <div className="book-content-container">
                     <div className="book-cover">
                          <img src={bookCover} alt="book cover"/>
-                         <button>Add To My Books</button>
-                         <button>Purchase</button>
                     </div>
                     <div>
                           <h3>{bookData.title}</h3>
@@ -65,8 +63,11 @@ function BookPage (props) {
                                    <p key={item}> By {item}</p>
                               ))}
                          </div>
-                          {/* <button>Add To My Books</button>
-                          <button>Purchase</button> */}
+                         <div className="book-buttons">
+                          <button>Add To My Books</button>
+                          <button>Purchase</button>
+                         <DeleteModal id={id} history={props.history} />
+                         </div>
                           <div className="book-description">
                               {ReactHtmlParser(description)} 
                           </div>
@@ -99,3 +100,4 @@ function BookPage (props) {
 }
 
 export default BookPage;
+

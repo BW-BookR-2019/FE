@@ -7,7 +7,12 @@ import {
   REGISTER_FAILURE,
   GET_START,
   GET_SUCCESS,
-  GET_FAILURE
+  GET_FAILURE,
+  DELETE_START,
+  DELETE_SUCCESS,
+  DELETE_FAILURE,
+  LOGOUT,
+  logout
 } from "../actions";
 
 const initialState = {
@@ -61,6 +66,29 @@ export const reducer = (state = initialState, action) => {
         error: action.payload,
         isFetching: false
       };
+    case DELETE_START:
+      return {
+        ...state,
+        isFetching: true,
+        error: null
+      };
+    case DELETE_SUCCESS:
+      return {
+        ...state,
+        isFetching: false
+      };
+    case DELETE_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+        isFetching: false
+      };
+    case LOGOUT:
+      return {
+        ...state,
+        isLoggedIn: false,
+        bookList: []
+      }
     default:
       return state;
   }

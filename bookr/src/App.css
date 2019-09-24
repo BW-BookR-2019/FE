@@ -5,7 +5,7 @@ body{
   color:white;
 }
 
-nav{
+.nav{
   background-color:#f3bb01;
   height:30px;
   padding:5px;
@@ -14,7 +14,7 @@ nav{
   justify-content:space-between;
 }
 
-nav a{
+.nav a{
   font-size:17px;
   margin-right:10px;
   margin-top:5px;
@@ -22,7 +22,7 @@ nav a{
   color:white;
 }
 
-nav a:hover{
+.nav a:hover{
   color: black;
 }
 
@@ -175,20 +175,28 @@ nav a:hover{
 .book-content-container p{
   margin:10px;
 }
+
+.book-buttons{
+  display:flex;
+}
 .book-content-container button{
-  padding:13px;
+  padding:10px 15px;
   margin:0 20px;
-  background-color:#d14f2b;
-  color:white;
+  background-color:#f3bb01;
+  color:black;
   border:none;
   margin-top:20px;
+  border-radius:10px;
+  font-size:15px;
+}
+.book-content-container button:hover{
+  background-color:#f2cc52;
 }
 
 .book-cover{
   margin-right:30px;
 }
 .book-description{
-  border-top:1px solid #f3bb01;
   margin-top:20px;
   padding:10px;
   opacity:.9;
