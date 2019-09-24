@@ -180,7 +180,7 @@ body{
   display:flex;
 }
 .book-content-container button{
-  padding:10px 15px;
+  padding:8px 15px;
   margin:0 20px;
   background-color:#f3bb01;
   color:black;
