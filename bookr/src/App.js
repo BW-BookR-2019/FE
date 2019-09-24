@@ -3,6 +3,7 @@ import './App.css';
 import { Route, Link } from 'react-router-dom';
 
 import PrivateRoute from './components/PrivateRoute';
+import Nav from './components/Nav';
 import BookList from './components/BookList';
 import BookPage from './components/BookPage';
 import Register from './components/Register';
@@ -12,7 +13,7 @@ import AddReviewForm from './components/AddReviewForm';
 function App() {
   return (
     <div className='App'>
-      <Link to='/book-list'>Book Selection</Link>
+      <Nav />
       <div>
         {/* <PrivateRoute exact path='/book-list' component={BookList} />
         <PrivateRoute path='/book-list/:id' component={BookPage} />
