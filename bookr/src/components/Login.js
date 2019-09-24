@@ -29,14 +29,23 @@ const Login = ({touched, errors}) => {
 			margin: '1% auto',
 		},
 		items: {
-			// border: '2px solid green',
-			
-		},
-		items2: {
 			margin: '3%'
+		},
+		link: {
+			textDecoration: 'none',
+			color: 'black',
+			transition: '0.5s',
+			'&:hover': {
+				color: 'blue',
+				transition: '0.3s'
+			}
+		},
+		btn: {
+			textTransform: 'lowercase'
 		}
 	}))
 
+	
 	// BUILDING FORM
 	const classes = useStyles();
 
@@ -80,12 +89,12 @@ const Login = ({touched, errors}) => {
 						/>
 					</label>
 
-					<label className='submit-button' className={classes.items2}>
-						<Button  variant='outlined' size='medium' type='submit'>login</Button>
+					<label className='submit-button' className={classes.items}>
+						<Button className={classes.btn} variant='outlined' size='medium' type='submit'>login</Button>
 					</label>
 
-					<p className={classes.items2}>
-						don't have an account?<br></br><Link className={classes} to='/register'> click to register</Link>
+					<p className={classes.items}>
+						don't have an account?<br></br><Link className={classes.link} to='/register'> click to register</Link>
 					</p>
 				</Form>
 			</div>

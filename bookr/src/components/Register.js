@@ -31,11 +31,19 @@ const Register = ({touched, errors}) => {
 			margin: '1% auto',
 		},
 		items: {
-			// border: '2px solid green',
-			
-		},
-		items2: {
 			margin: '3%'
+		},
+		link: {
+			textDecoration: 'none',
+			color: 'black',
+			transition: '0.5s',
+			'&:hover': {
+				color: 'blue',
+				transition: '0.3s'
+			}
+		},
+		btn: {
+			textTransform: 'lowercase'
 		}
 	}))
 
@@ -98,12 +106,12 @@ const Register = ({touched, errors}) => {
 						/>
 		
 					</label>
-					<label className='submit-button' className={classes.items2}>
-						<Button variant='outlined' size='medium' type='submit'>register</Button>
+					<label className='submit-button' className={classes.items}>
+						<Button className={classes.btn} variant='outlined' size='medium' type='submit'>register</Button>
 					</label>
 					
-					<p className={classes.items2}>
-						already have an account?<br></br><Link className={classes} to='/login'> click to login</Link>
+					<p className={classes.items}>
+						already have an account?<br></br><Link className={classes.link} to='/login'> click to login</Link>
 					</p>
 				</Form>
 			</div>
