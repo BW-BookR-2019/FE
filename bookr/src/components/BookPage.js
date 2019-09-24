@@ -44,6 +44,8 @@ function BookPage (props) {
                <div className="book-content-container">
                     <div className="book-cover">
                          <img src={bookCover} alt="book cover"/>
+                         <button>Add To My Books</button>
+                         <button>Purchase</button>
                     </div>
                     <div>
                           <h3>{bookData.title}</h3>
@@ -63,8 +65,8 @@ function BookPage (props) {
                                    <p key={item}> By {item}</p>
                               ))}
                          </div>
-                          <button>Add To My Books</button>
-                          <button>Purchase</button>
+                          {/* <button>Add To My Books</button>
+                          <button>Purchase</button> */}
                           <div className="book-description">
                               {ReactHtmlParser(description)} 
                           </div>
