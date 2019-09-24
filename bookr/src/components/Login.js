@@ -98,12 +98,6 @@ const FormikLogin = withFormik({
 			.required('Password is required')
 	}),
 	handleSubmit(values, { props }){
-		// axios
-		// .post('https://reqres.in/api/users/', values)
-		// .then(response => {
-		// 	setStatus(response.data);
-		// })
-		// .catch(error => console.log('Error in axios', error.response))
 		props.login(values, props.history);
 	}
 })(Login);

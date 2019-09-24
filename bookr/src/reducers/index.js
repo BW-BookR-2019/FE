@@ -11,7 +11,7 @@ import {
 } from "../actions";
 
 const initialState = {
-  bookList: {},
+  bookList: [],
   isFetching: false,
   error: null,
   isLoggedIn: false

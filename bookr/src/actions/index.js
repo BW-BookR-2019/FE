@@ -15,12 +15,32 @@ export const login = (credentials, history) => dispatch => {
       dispatch({ type: LOGIN_SUCCESS });
       history.push("/book-list");
     })
-    .catch(err => {
-      console.log(err);
-      // TODO: add error handling
-      // dispatch({ type: LOGIN_FAILURE })
-    });
+  .catch(err => {
+    console.log(err);
+    // TODO: add error handling
+    // dispatch({ type: LOGIN_FAILURE })
+  });
+
+  // TODO: uncomment when backend is deployed
+  // axios
+  //   .post(
+  //     "https://jondscott21-internationschool.herokuapp.com/login",
+  //     `grant_type=password&username=${credentials.email}&password=${credentials.password}`,
+  //     {
+  //       headers: {
+  //         Authorization: `Basic ${btoa("lambda-client:lambda-secret")}`,
+  //         "Content-Type": "application/x-www-form-urlencoded"
+  //       }
+  //     }
+  //   )
+  //   .then(res => localStorage.setItem("token", res.data.access_token))
+  //   .catch(err => {
+  //     console.log(err)
+  //     // TODO: add error handling
+  //     // dispatch({ type: LOGIN_FAILURE })
+  //   });
 };
+
 export const REGISTER_START = "REGISTER_START";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAILURE = "REGISTER_FAILURE";
