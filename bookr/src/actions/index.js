@@ -70,3 +70,13 @@ export const getBookList = () => dispatch => {
   dispatch({ type: GET_START });
   // TODO: add axios get request
 };
+
+export const DELETE_START = "DELETE_START";
+export const DELETE_SUCCESS = "DELETE_SUCCESS";
+export const DELETE_FAILURE = "DELETE_FAILURE";
+
+export const deleteBook = (id) => dispatch => {
+  console.log(`book with id: ${id} deleting...`)
+  // dispatch({ type: DELETE_START });
+  // TODO: add axios DELETE request
+};

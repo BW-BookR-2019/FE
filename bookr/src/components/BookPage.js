@@ -3,6 +3,8 @@ import axios from "axios";
 import ReactHtmlParser from "react-html-parser";
 // import { useSelector } from 'react-redux';
 
+import DeleteModal from './DeleteModal';
+
 function BookPage(props) {
   let id = props.match.params.id;
 
@@ -43,6 +45,7 @@ function BookPage(props) {
           </div>
           <button>Add To My Books</button>
           <button>Purchase</button>
+          <DeleteModal id={id} />
         </div>
       </div>
 
@@ -52,3 +55,4 @@ function BookPage(props) {
 }
 
 export default BookPage;
+
