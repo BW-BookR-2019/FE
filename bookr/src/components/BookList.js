@@ -11,7 +11,7 @@ function BookList (props){
 
      // * State for search and setting API URL
      const [searchTerm, setSearchTerm] = useState('')
-     const [searching, setSearching] = useState('')
+     const [searching, setSearching] = useState('coding books')
 
      useEffect(() => {
           if (searching !== ''){
@@ -38,6 +38,9 @@ function BookList (props){
     
      return(
           <div>
+
+          <div>
+          </div>
   
           <div className="search-container">
                <form onSubmit={submitForm} className="form-container">
@@ -64,16 +67,16 @@ function BookList (props){
                                         // rating={item.volumeInfo.averageRating}
                                         widgetDimensions="15px"
                                         widgetSpacings="1px" >
-                                        <Ratings.Widget widgetRatedColor="gold" />
-                                        <Ratings.Widget widgetRatedColor="gold" />
-                                        <Ratings.Widget widgetRatedColor="gold" />
-                                        <Ratings.Widget widgetRatedColor="gold" />
-                                        <Ratings.Widget widgetRatedColor="gold" />
+                                        <Ratings.Widget widgetRatedColor="#f3bb01" />
+                                        <Ratings.Widget widgetRatedColor="#f3bb01" />
+                                        <Ratings.Widget widgetRatedColor="#f3bb01" />
+                                        <Ratings.Widget widgetRatedColor="#f3bb01" />
+                                        <Ratings.Widget widgetRatedColor="#f3bb01" />
                                    </Ratings>
                                    <h3>{item.volumeInfo.title}</h3>
                               </Link>
                               <p className="book-subtitle">{item.volumeInfo.subtitle}</p>
-                              <p>{item.searchInfo.textSnippet}</p>
+                              {/* <p>{item.searchInfo.textSnippet}</p> */}
                          </div>
                     ))
                }

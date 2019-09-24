@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios'
 import ReactHtmlParser from 'react-html-parser';
+import Ratings from 'react-ratings-declarative';
+
 
 function BookPage (props) {
 
@@ -20,7 +22,7 @@ function BookPage (props) {
                     const data = response.data.volumeInfo
                     setBookData(data)
                     setBookAuthor(response.data.volumeInfo.authors)
-                    setBookCover(response.data.volumeInfo.imageLinks.thumbnail)
+                    setBookCover(response.data.volumeInfo.imageLinks.small || response.data.volumeInfo.imageLinks.thumbnail)
                })
      }, [id])
 
@@ -29,30 +31,36 @@ function BookPage (props) {
 
 
      return(
-          <div>
-               <div>
-                    <div>
+               <div className="book-content-container">
+                    <div className="book-cover">
                          <img src={bookCover} alt="book cover"/>
-                         <p>Ratings: </p>
                     </div>
                      <div>
                           <h3>{bookData.title}</h3>
                           <h4>{bookData.subtitle}</h4>
-                          <p>{bookData.publisher}</p>
-                          <div>
+                    <p>Ratings: <Ratings
+                         rating={5}
+                         widgetDimensions="15px"
+                         widgetSpacings="1px" >
+                         <Ratings.Widget widgetRatedColor="#f3bb01" />
+                         <Ratings.Widget widgetRatedColor="#f3bb01" />
+                         <Ratings.Widget widgetRatedColor="#f3bb01" />
+                         <Ratings.Widget widgetRatedColor="#f3bb01" />
+                         <Ratings.Widget widgetRatedColor="#f3bb01" />
+                    </Ratings></p>
+                         <div>
                               {bookAuthor.map(item => (
-                              <p key={item}>{item}</p>
+                                   <p key={item}> By {item}</p>
                               ))}
-                          </div>
+                         </div>
                           <button>Add To My Books</button>
                           <button>Purchase</button>
+                          <div className="book-description">
+                              {ReactHtmlParser(description)} 
+                          </div>
+                         <p>Publisher: {bookData.publisher}</p>
                      </div>
                 </div>
- 
-               <div>
-                   { ReactHtmlParser(description) } 
-               </div>
-          </div>
      )
 }
 
