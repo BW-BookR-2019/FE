@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import axios from 'axios'
 import ReactHtmlParser from 'react-html-parser';
 import Ratings from 'react-ratings-declarative';
+import { Link } from 'react-router-dom'
 // import { useSelector } from 'react-redux';
 
 import DeleteModal from './DeleteModal';
@@ -59,6 +60,7 @@ function BookPage (props) {
                          </div>
                           <button>Add To My Books</button>
                           <button>Purchase</button>
+                          <button><Link style={{color: 'white', textDecoration: 'none'}} to={`/book-list/${id}/add-review`}>Add a Review</Link></button>
                          <DeleteModal id={id} history={props.history} />
 
                           <div className="book-description">
