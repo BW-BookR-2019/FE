@@ -2500,7 +2500,7 @@ clone-deep@^4.0.1:
     kind-of "^6.0.2"
     shallow-clone "^3.0.0"
 
-clsx@^1.0.2:
+clsx@^1.0.2, clsx@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/clsx/-/clsx-1.0.4.tgz#0c0171f6d5cb2fe83848463c15fcc26b4df8c2ec"
   integrity sha512-1mQ557MIZTrL/140j+JVdRM6e31/OA4vTYxXgqIIZlndyfjHpyawKZia1Im05Vp9BWmImkcNrNtFYQMyFcgJDg==
@@ -4230,6 +4230,11 @@ form-data@~2.3.2:
     asynckit "^0.4.0"
     combined-stream "^1.0.6"
     mime-types "^2.1.12"
+
+formik-material-ui@^0.0.22:
+  version "0.0.22"
+  resolved "https://registry.yarnpkg.com/formik-material-ui/-/formik-material-ui-0.0.22.tgz#52b0fa6eed5f11e1fecf2bd6f2bcb41eb627ce7c"
+  integrity sha512-ETfGBGJp1yA5C6QKTMibMtsBEomKRqZ45yAFCN8dYoTdD/toE4ETdCL1DJZZvJj5ZWQfqDaTJY+qhXP7OUM/gw==
 
 formik@^1.5.8:
   version "1.5.8"

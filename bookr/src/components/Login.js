@@ -1,47 +1,81 @@
 import React from 'react';
 import { withFormik, Form, Field } from 'formik';
 import { Link } from 'react-router-dom';
-import * as Yup from 'yup'
 import { connect } from 'react-redux';
 import { login } from '../actions';
+import * as Yup from 'yup';
+import { TextField } from 'formik-material-ui';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+
 
 const Login = ({touched, errors}) => {
 	// STYLING
+	const useStyles = makeStyles(theme => ({
+		container: {
+			display: 'flex',
+			flexDirection: 'column',
+			border: '2px solid black',
+			borderRadius: '1%',
+			margin: '8% auto',
+			width: '30%',
+			padding: '3% 1% 1% 1%'
+		},
+		subcontainer: {
+			display: 'flex',
+			justifyContent: 'center',
+			flexDirection: 'column',
+			textAlign: 'left',
+			width: '60%',
+			margin: '1% auto',
+		},
+		items: {
+			// border: '2px solid green',
+			
+		},
+		items2: {
+			margin: '3%'
+		}
+	}))
 
 	// BUILDING FORM
+	const classes = useStyles();
 
   return(
 		<>
-			<div>Hello Login page!</div>
 			<div className='register-form'>
-				{/* IMPORT FORM AND FIELD FROM FORMIK AND CREATE FORM WITH 1 FIELD AS A TEST */}
-				<Form>
-					<label className='textContainer'>
-						Email
+				<Form className={classes.container}>
+					<label className='email-container' className={classes.subcontainer}>
+						email
 						<Field
 						type='text'
 						name='email'
-						placeholder='Email'
+						component={TextField}
+						variant="outlined"
+						margin='dense'
+						helperText={(touched.email && errors.email) && errors.email}
 						/>
-						{touched.email && errors.email &&
-							<p className='error'>{errors.email}</p>
-						}
-
-						Password
+					</label>
+						
+					<label className='password-container' className={classes.subcontainer}>
+						password
 						<Field
 						type='password'
 						name='password'
-						placeholder='Password'
+						component={TextField}
+						variant="outlined"
+						margin='dense'
+						helperText={(touched.password && errors.password) && errors.password}
 						/>
-						{touched.password && errors.password &&
-							<p className='error'>{errors.password}</p>
-						}
+					</label>
 
+					<label className='submit-button' className={classes.items2}>
+						<Button  variant='outlined' size='medium' type='submit'>login</Button>
 					</label>
-					<label className='submit-button'>
-						<button type='submit'>login</button>
-					</label>
-					<Link to='/register'>don't have an account? click to register</Link>
+
+					<p className={classes.items2}>
+						don't have an account?<br></br><Link className={classes} to='/register'> click to register</Link>
+					</p>
 				</Form>
 			</div>
 		</>
@@ -70,7 +104,7 @@ const FormikLogin = withFormik({
 		// 	setStatus(response.data);
 		// })
 		// .catch(error => console.log('Error in axios', error.response))
-		props.register(values, props.history);
+		props.login(values, props.history);
 	}
 })(Login);
 
