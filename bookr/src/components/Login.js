@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { withFormik, Form, Field } from 'formik';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { login } from '../actions';
 import * as Yup from 'yup';
 import { TextField } from 'formik-material-ui';
 import { makeStyles } from '@material-ui/core/styles';
@@ -40,16 +41,6 @@ const Login = ({touched, errors}) => {
 	// BUILDING FORM
 	const classes = useStyles();
 
-	const [user, setUser] = useState({name: '', email: '', password: ''});
-	const handleChanges = e => {
-		setUser({...user, [e.target.name]:e.target.value})
-	}
-
-	// const submitForm = e => {
-	// 	e.preventDefault();
-	// 	setUser({name:'', email:'', password:''})
-	// }
-
   return(
 		<>
 			<div className='register-form'>
@@ -59,7 +50,6 @@ const Login = ({touched, errors}) => {
 						<Field
 						type='text'
 						name='email'
-						// onChange={handleChanges}
 						component={TextField}
 						variant="outlined"
 						margin='dense'
@@ -72,7 +62,6 @@ const Login = ({touched, errors}) => {
 						<Field
 						type='password'
 						name='password'
-						// onChange={handleChanges}
 						component={TextField}
 						variant="outlined"
 						margin='dense'
@@ -108,14 +97,9 @@ const FormikLogin = withFormik({
 		password: Yup.string()
 			.required('Password is required')
 	}),
-	handleSubmit(values, { setStatus }){
-		axios
-		.post('https://reqres.in/api/users/', values)
-		.then(response => {
-			setStatus(response.data);
-		})
-		.catch(error => console.log('Error in axios', error.response))
+	handleSubmit(values, { props }){
+		props.login(values, props.history);
 	}
 })(Login);
 
-export default FormikLogin;
+export default connect(null, { login })(FormikLogin);
