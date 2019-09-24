@@ -1,22 +1,121 @@
-.App {
-  text-align: center;
+
+body{
+  margin:0 auto;
+  background-color:#013533;
+  color:white;
 }
 
-.App-logo {
-  height: 40vmin;
+
+
+
+.form-container{
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.search-container{
+  max-width:1000px;
+  width:100%;
+  margin:0 auto;
 }
 
-.App-link {
-  color: #09d3ac;
+.search-form{
+  height:30px;
+  width:400px;
+  border-top-left-radius:10px;
+  border-bottom-left-radius:10px;
+  padding:4px;
+  border:none;
 }
+
+.search-button{
+  height:40px;
+  width:90px;
+  border-top-right-radius:10px;
+  border-bottom-right-radius:10px;
+  background-color:#d14f2b;
+  border:none;
+  color:white;
+  font-size:15px;
+}
+.search-button:hover{
+ 
+}
+
+
+
+.book-list-container{
+  margin:20px 0;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  align-content:center;
+  font-family: 'Cabin', sans-serif;
+}
+
+
+.book-list-item{
+  width:18.5%;
+  height:280px;
+  margin:20px .55%;
+  text-align:center;
+  overflow:auto;
+}
+.book-list-item img{
+  width:138px;
+  height:160px;
+}
+
+.book-list-item h3{
+  text-decoration:none;
+  color:white;
+  font-size:1.1rem;
+  font-weight:600;
+  margin:0 1px;
+  text-decoration:none;
+}
+.book-list-item p{
+  font-size:14px;
+  margin:3px;
+}
+
+.book-subtitle{
+  font-style: italic;
+}
+
+.review-container{
+  overflow:hidden;
+  height:300px;
+  text-align:center;
+  background: url(https://images.unsplash.com/photo-1526721940322-10fb6e3ae94a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80)
+}
+
+.review-content{
+  background:rgba(216,136,134,.5);
+  height:100%;
+  display:flex;
+  justify-content:center;
+  flex-direction:column;
+  font-family: 'PT Serif', serif;
+}
+
+.review-content h3{
+  margin:0;
+  font-size:2.7rem;
+  font-style:italic;
+}
+.review-content button{
+  text-transform:uppercase;
+  padding:10px 30px;
+  border-radius:40px;
+  width:220px;
+  margin:0 auto;
+  font-size:14px;
+  font-weight:500;
+ font-family: 'PT Serif', serif;
+}
+
+
+
+

@@ -38,27 +38,31 @@ function BookList (props){
     
      return(
           <div>
-               <form onSubmit={submitForm}>
-                    <label htmlFor="search">Search: </label>
+  
+          <div className="search-container">
+               <form onSubmit={submitForm} className="form-container">
                     <input 
                          id="search"
                          type="text"
                          name="textfield"
-                         placeholder="Search"
+                         placeholder="Search For a Book to Review!"
                          value={searchTerm}
                          onChange={handleChange}
+                         className="search-form"
                     />
-                    <button type="submit">Search</button>
+                    <button type="submit" className="search-button">Search</button>
                </form>
 
+               <div className="book-list-container">
                {
                     bookData.map(item => (
-                         <div key={item.id}>
+                         <div key={item.id} className="book-list-item">
                               <Link to={`/book-list/${item.id}`}>
                                    <img src={item.volumeInfo.imageLinks.thumbnail} alt="book cover"/>
                                    <Ratings
-                                        rating={item.volumeInfo.averageRating}
-                                        widgetDimensions="25px"
+                                        rating={5}
+                                        // rating={item.volumeInfo.averageRating}
+                                        widgetDimensions="15px"
                                         widgetSpacings="1px" >
                                         <Ratings.Widget widgetRatedColor="gold" />
                                         <Ratings.Widget widgetRatedColor="gold" />
@@ -68,11 +72,22 @@ function BookList (props){
                                    </Ratings>
                                    <h3>{item.volumeInfo.title}</h3>
                               </Link>
-                              <p>{item.volumeInfo.subtitle}</p>
-                              <p>{item.volumeInfo.publishedDate}</p>
+                              <p className="book-subtitle">{item.volumeInfo.subtitle}</p>
+                              <p>{item.searchInfo.textSnippet}</p>
                          </div>
                     ))
                }
+               </div>
+          </div>
+
+          <div className="review-container">
+               <div className="review-content">
+                    <h3>Did You Write A Book, Want Us To Review It?</h3>
+                    <p>Get featured and discovered by people from around the world.</p>
+                    <button>Get Started</button>
+               </div>
+          </div>
+
           </div>
      )
 }
