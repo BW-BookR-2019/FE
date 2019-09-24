@@ -2,12 +2,16 @@ import React, {useEffect, useState} from 'react'
 import axios from 'axios'
 import ReactHtmlParser from 'react-html-parser';
 import Ratings from 'react-ratings-declarative';
+// import { useSelector } from 'react-redux';
+
 
 
 function BookPage (props) {
 
      // * Grabbing dynamic URL id
      let id = props.match.params.id
+       // const bookList = useSelector(state => state.bookList);
+
 
      // * State values for book data, author, and image respectively
      const [bookData, setBookData] = useState([])
@@ -64,4 +68,4 @@ function BookPage (props) {
      )
 }
 
-export default BookPage 
+export default BookPage;

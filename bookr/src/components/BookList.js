@@ -2,12 +2,16 @@ import React, {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
 import Ratings from 'react-ratings-declarative';
+// import { useSelector } from 'react-redux';
+
 
 
 function BookList (props){
 
      // * State for book data after search
      const [bookData, setBookData] = useState([]);
+       // const bookList = useSelector(state => state.bookList);
+
 
      // * State for search and setting API URL
      const [searchTerm, setSearchTerm] = useState('')
@@ -93,5 +97,5 @@ function BookList (props){
 
           </div>
      )
-}
-export default BookList 
+          }
+          export default BookList;

@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { withFormik, Form, Field } from 'formik';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { register } from '../actions';
 import * as Yup from 'yup';
 // WAS HAVING ISSUES WITH GETTING YUP TO WORK WITH MATERIAL UI SINCE YOU CHANGE FORMIK'S 'FIELD' TO MATERIAL UI'S 'TEXTFIELD'
 	// FOUND A GITHUB REPO THAT HELPS WITH USING FORMIK AND MATERIAL UI TOGETHER: https://github.com/stackworx/formik-material-ui
@@ -31,26 +32,24 @@ const Register = ({touched, errors}) => {
 			margin: '1% auto',
 		},
 		items: {
-			// border: '2px solid green',
-			
-		},
-		items2: {
 			margin: '3%'
+		},
+		link: {
+			textDecoration: 'none',
+			color: 'black',
+			transition: '0.5s',
+			'&:hover': {
+				color: 'blue',
+				transition: '0.3s'
+			}
+		},
+		btn: {
+			textTransform: 'lowercase'
 		}
 	}))
 
 	// BUILDING FORM
 	const classes = useStyles();
-
-	const [user, setUser] = useState({name: '', email: '', password: ''});
-	const handleChanges = e => {
-		setUser({...user, [e.target.name]:e.target.value})
-	}
-
-	// const submitForm = e => {
-	// 	e.preventDefault();
-	// 	setUser({name:'', email:'', password:''})
-	// }
 
   return(
 		<>
@@ -61,7 +60,6 @@ const Register = ({touched, errors}) => {
 						<Field
 						type='text'
 						name='name'
-						// onChange={handleChanges}	
 						component={TextField}
 						// ADDED OUTLINE VARIANT FROM MATERIAL UI
 						variant="outlined"
@@ -76,7 +74,6 @@ const Register = ({touched, errors}) => {
 						<Field
 						type='text'
 						name='email'
-						// onChange={handleChanges}
 						component={TextField}
 						variant="outlined"
 						margin='dense'
@@ -90,7 +87,6 @@ const Register = ({touched, errors}) => {
 						<Field
 						type='password'
 						name='password'
-						// onChange={handleChanges}						
 						component={TextField}
 						variant="outlined"
 						margin='dense'
@@ -98,12 +94,12 @@ const Register = ({touched, errors}) => {
 						/>
 		
 					</label>
-					<label className='submit-button' className={classes.items2}>
-						<Button variant='outlined' size='medium' type='submit'>register</Button>
+					<label className='submit-button' className={classes.items}>
+						<Button className={classes.btn} variant='outlined' size='medium' type='submit'>register</Button>
 					</label>
 					
-					<p className={classes.items2}>
-						already have an account?<br></br><Link className={classes} to='/login'> click to login</Link>
+					<p className={classes.items}>
+						already have an account?<br></br><Link className={classes.link} to='/login'> click to login</Link>
 					</p>
 				</Form>
 			</div>
@@ -129,14 +125,9 @@ const FormikRegister = withFormik({
 			.min(6, 'password must be at least 6 characters long')
 			.required('password is required')
 	}),
-	handleSubmit(values, { setStatus }){
-		axios
-		.post('https://reqres.in/api/users/', values)
-		.then(response => {
-			setStatus(response.data);
-		})
-		.catch(error => console.log('Error in axios', error.response))
+	handleSubmit(values, { props }){
+		props.register(values, props.history);
 	}
 })(Register);
 
-export default FormikRegister;
+export default connect(null, { register })(FormikRegister);
