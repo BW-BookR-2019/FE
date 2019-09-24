@@ -54,7 +54,7 @@ export default function DeleteModal(props) {
         <Fade in={open}>
           <div className={classes.paper}>
             <h2 id="transition-modal-title">Are you sure you want to delete this book?</h2>
-            <button onClick={() => dispatch(deleteBook(props.id))}>Yes</button>
+            <button onClick={() => dispatch(deleteBook(props.id, props.history))}>Yes</button>
             <button onClick={handleClose}>No</button>
           </div>
         </Fade>

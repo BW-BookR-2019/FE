@@ -85,7 +85,7 @@ export const DELETE_START = "DELETE_START";
 export const DELETE_SUCCESS = "DELETE_SUCCESS";
 export const DELETE_FAILURE = "DELETE_FAILURE";
 
-export const deleteBook = (id) => dispatch => {
+export const deleteBook = (id, history) => dispatch => {
   console.log(`book with id: ${id} deleting...`)
   // dispatch({ type: DELETE_START });
   // TODO: add axios DELETE request endpoint
@@ -93,6 +93,7 @@ export const deleteBook = (id) => dispatch => {
   //   .then(res => {
   //     console.log(res)
   //     dispatch({ type: DELETE_SUCCESS })
+  //     history.push('/book-list')
   //   })
   //   .catch(err => {
   //     console.log(err)

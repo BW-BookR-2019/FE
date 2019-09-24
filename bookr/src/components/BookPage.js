@@ -45,7 +45,7 @@ function BookPage(props) {
           </div>
           <button>Add To My Books</button>
           <button>Purchase</button>
-          <DeleteModal id={id} />
+          <DeleteModal id={id} history={props.history} />
         </div>
       </div>
 
