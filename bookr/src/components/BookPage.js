@@ -3,6 +3,7 @@ import axios from 'axios'
 import ReactHtmlParser from 'react-html-parser';
 import Ratings from 'react-ratings-declarative';
 import { Link } from 'react-router-dom'
+import reviews from '../reviewdata'
 // import { useSelector } from 'react-redux';
 
 import DeleteModal from './DeleteModal';
@@ -35,12 +36,17 @@ function BookPage (props) {
      const description = bookData.description
 
 
+     // * State to hold review data
+     const [review, setReview] = useState(reviews)
+
+
      return(
+          <div>
                <div className="book-content-container">
                     <div className="book-cover">
                          <img src={bookCover} alt="book cover"/>
                     </div>
-                     <div>
+                    <div>
                           <h3>{bookData.title}</h3>
                           <h4>{bookData.subtitle}</h4>
                     <p>Ratings: <Ratings
@@ -58,17 +64,40 @@ function BookPage (props) {
                                    <p key={item}> By {item}</p>
                               ))}
                          </div>
+                         <div className="book-buttons">
                           <button>Add To My Books</button>
                           <button>Purchase</button>
-                          <button><Link style={{color: 'white', textDecoration: 'none'}} to={`/book-list/${id}/add-review`}>Add a Review</Link></button>
+                              <button><Link style={{ color: 'white', textDecoration: 'none' }} to={`/book-list/${id}/add-review`}></Link>Add a Review</button>
                          <DeleteModal id={id} history={props.history} />
-
+                         </div>
                           <div className="book-description">
                               {ReactHtmlParser(description)} 
                           </div>
                          <p>Publisher: {bookData.publisher}</p>
                      </div>
-                </div>
+               </div>
+               <div className='review-section'>
+                    <h2>Customer Reviews</h2>
+                    {
+                         review.map(item => (
+                              <div className="review-section">
+                                   <h3 className="review-content-section">{item.user} <Ratings
+                                        rating={item.rating}
+                                        widgetDimensions="12px"
+                                        widgetSpacings="1px" >
+                                        <Ratings.Widget widgetRatedColor="#f3bb01" />
+                                        <Ratings.Widget widgetRatedColor="#f3bb01" />
+                                        <Ratings.Widget widgetRatedColor="#f3bb01" />
+                                        <Ratings.Widget widgetRatedColor="#f3bb01" />
+                                        <Ratings.Widget widgetRatedColor="#f3bb01" />
+                                   </Ratings></h3>
+                                   <p>"{item.review}"</p>
+                              </div>
+                         ))
+                    }
+               </div>
+
+          </div>
      )
 }
 

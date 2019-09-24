@@ -80,7 +80,7 @@ function BookList (props){
                                    <h3>{item.volumeInfo.title}</h3>
                               </Link>
                               <p className="book-subtitle">{item.volumeInfo.subtitle}</p>
-                              {/* <p>{item.searchInfo.textSnippet}</p> */}
+                              {item.saleInfo.buyLink ? <a className="purchase-button" href={item.saleInfo.buyLink} alt="purchase link">In Stock!</a> : null }
                          </div>
                     ))
                }
@@ -94,7 +94,6 @@ function BookList (props){
                     <button>Get Started</button>
                </div>
           </div>
-
           </div>
      )
           }
