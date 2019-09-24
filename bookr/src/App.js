@@ -14,7 +14,7 @@ function App() {
   return (
     <div className='App'>
       <nav>
-        <img className="logo" src={NavLogo} />
+        <img className="logo" src={NavLogo} alt="logo" />
         <NavLink to='/book-list'>Book Selection</NavLink>
       </nav>
 

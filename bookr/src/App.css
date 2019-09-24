@@ -78,7 +78,7 @@ nav a:hover{
 }
 .book-list-item{
   width:18.5%;
-  height:280px;
+  height:300px;
   margin:10px .55%;
   text-align:center;
 }
@@ -104,6 +104,18 @@ nav a:hover{
 .book-subtitle{
   font-style: italic;
   text-align:center;
+}
+.purchase-button{
+  text-decoration:none;
+  color:white;
+  font-size:14px;
+  padding:3px 20px;
+  background-color:#f3bb01;
+  color:black;
+  border-radius:5px;
+}
+.purchase-button:hover{
+  background-color:#f2cc52;
 }
 
 
