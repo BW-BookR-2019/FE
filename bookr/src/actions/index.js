@@ -100,3 +100,11 @@ export const deleteBook = (id, history) => dispatch => {
   //     dispatch({ type: DELETE_FAILURE })
   //   })
 };
+
+export const LOGOUT = "LOGOUT";
+
+export const logout = () => {
+  console.log(`loggin out...`)
+  localStorage.clear();
+  return { type: LOGOUT }
+};
