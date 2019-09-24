@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+// import {BookPage} from '../components/BookPage'
 
-const AddReviewForm = () => {
+const AddReviewForm = (props) => {
   return (
     <div>
-      <h1>Leave a review for (book.title)</h1>
+      <h1>Leave a review for {props.info}</h1>
       <h5>Review: (book.id)</h5>
       <p>What did you think?</p>
       <form>
