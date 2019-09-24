@@ -15,7 +15,7 @@ const Login = ({touched, errors}) => {
 		container: {
 			display: 'flex',
 			flexDirection: 'column',
-			border: '2px solid black',
+			border: '2px solid #cf4e28',
 			borderRadius: '1%',
 			margin: '8% auto',
 			width: '30%',
@@ -30,23 +30,41 @@ const Login = ({touched, errors}) => {
 			margin: '1% auto',
 		},
 		items: {
-			margin: '3%'
+			margin: '3% auto',
+			textAlign: 'center'
 		},
 		link: {
 			textDecoration: 'none',
-			color: 'black',
+			color: 'white',
 			transition: '0.5s',
 			'&:hover': {
-				color: 'blue',
+				color: '#edb901',
 				transition: '0.3s'
 			}
 		},
 		btn: {
-			textTransform: 'lowercase'
+			textTransform: 'lowercase',
+			color: 'white',
+			borderColor: 'white',
+			backgroundColor: '#edb901',
+			'&:hover': {
+				backgroundColor: '#cf4e28',
+				transition: '0.3s'
+			}
+		},
+		inputOutline: {
+			backgroundColor: 'white',
+			borderRadius: '0.25rem',
+			'&$focusedOutline $notchedOutline' : {
+				borderColor: '#cf4e28 !important'
+			},
+		},
+		focusedOutline: {},
+		notchedOutline: {
+			border: '2px solid #edb901',
 		}
 	}))
 
-	
 	// BUILDING FORM
 	const classes = useStyles();
 
@@ -63,6 +81,13 @@ const Login = ({touched, errors}) => {
 						variant="outlined"
 						margin='dense'
 						helperText={(touched.email && errors.email) && errors.email}
+						InputProps={{
+							classes: {
+								root: classes.inputOutline,
+								focused: classes.focusedOutline,
+								notchedOutline: classes.notchedOutline
+							}
+						}}
 						/>
 					</label>
 						
@@ -75,6 +100,13 @@ const Login = ({touched, errors}) => {
 						variant="outlined"
 						margin='dense'
 						helperText={(touched.password && errors.password) && errors.password}
+						InputProps={{
+							classes: {
+								root: classes.inputOutline,
+								focused: classes.focusedOutline,
+								notchedOutline: classes.notchedOutline
+							}
+						}}
 						/>
 					</label>
 
