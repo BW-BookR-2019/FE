@@ -46,7 +46,6 @@ export const reducer = (state = initialState, action) => {
         return {
           ...state,
           isFetching: false,
-          isLoggedIn: true
         }
     case GET_START:
       return {

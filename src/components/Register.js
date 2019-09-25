@@ -13,7 +13,7 @@ import Button from '@material-ui/core/Button';
 
 const Register = ({touched, errors}) => {
 	// STYLING
-	const useStyles = makeStyles(theme => ({
+	const useStyles = makeStyles(() => ({
 		container: {
 			display: 'flex',
 			flexDirection: 'column',
@@ -75,16 +75,16 @@ const Register = ({touched, errors}) => {
 			<div className='register-form'>
 				<Form className={classes.container}>
 					<label className='name-container' className={classes.subcontainer}>
-						name 
+						username 
 						<Field
 						type='text'
-						name='name'
+						name='username'
 						component={TextField}
 						// ADDED OUTLINE VARIANT FROM MATERIAL UI
 						variant="outlined"
 						// MADE INPUT FIELD DENSE USING MATERIAL UI
 						margin='dense'
-						helperText={(touched.name && errors.name) && errors.name}
+						helperText={(touched.username && errors.username) && errors.username}
 						InputProps={{
 							classes: {
 								root: classes.inputOutline,
@@ -93,26 +93,6 @@ const Register = ({touched, errors}) => {
 							}
 						}}
 						/>
-					</label>
-
-					<label className='email-container' className={classes.subcontainer}>
-						email
-						<Field
-						type='text'
-						name='email'
-						component={TextField}
-						variant="outlined"
-						margin='dense'
-						helperText={(touched.email && errors.email) && errors.email}
-						InputProps={{
-							classes: {
-								root: classes.inputOutline,
-								focused: classes.focusedOutline,
-								notchedOutline: classes.notchedOutline
-							}
-						}}
-						/>
-						
 					</label>
 
 					<label className='password-container' className={classes.subcontainer}>
@@ -148,24 +128,24 @@ const Register = ({touched, errors}) => {
 }
 
 const FormikRegister = withFormik({
-	mapPropsToValues({name, email, password}
+	mapPropsToValues({username, password}
 	) {
 			return {
-				name: name || '',
-				email: email || '',
+				username: username || '',
 				password: password || ''
 			}
 	},
+
 	validationSchema: Yup.object().shape({
-		name: Yup.string().required('name is required'),
-		email: Yup.string()
-			.email('email is invalid')
-			.required('email is required'),
+		username: Yup.string()
+			.required('username is required'),
 		password: Yup.string()
 			.min(6, 'password must be at least 6 characters long')
 			.required('password is required')
 	}),
+
 	handleSubmit(values, { props }){
+		console.log('hitting handleSubmit')
 		props.register(values, props.history);
 	}
 })(Register);

@@ -11,7 +11,7 @@ import Button from '@material-ui/core/Button';
 
 const Login = ({touched, errors}) => {
 	// STYLING
-	const useStyles = makeStyles(theme => ({
+	const useStyles = makeStyles(() => ({
 		container: {
 			display: 'flex',
 			flexDirection: 'column',
@@ -72,15 +72,17 @@ const Login = ({touched, errors}) => {
 		<>
 			<div className='register-form'>
 				<Form className={classes.container}>
-					<label className='email-container' className={classes.subcontainer}>
-						email
+					<label className='name-container' className={classes.subcontainer}>
+						username 
 						<Field
 						type='text'
-						name='email'
+						name='username'
 						component={TextField}
+						// ADDED OUTLINE VARIANT FROM MATERIAL UI
 						variant="outlined"
+						// MADE INPUT FIELD DENSE USING MATERIAL UI
 						margin='dense'
-						helperText={(touched.email && errors.email) && errors.email}
+						helperText={(touched.username && errors.username) && errors.username}
 						InputProps={{
 							classes: {
 								root: classes.inputOutline,
@@ -124,17 +126,16 @@ const Login = ({touched, errors}) => {
 }
 
 const FormikLogin = withFormik({
-	mapPropsToValues({email, password}
+	mapPropsToValues({username, password}
 	) {
 			return {
-				email: email || '',
+				username: username || '',
 				password: password || ''
 			}
 	},
 	validationSchema: Yup.object().shape({
-		email: Yup.string()
-			.email('Email is invalid')
-			.required('Email is required'),
+		username: Yup.string()
+			.required('username is required'),
 		password: Yup.string()
 			.required('Password is required')
 	}),

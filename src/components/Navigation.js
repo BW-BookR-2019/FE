@@ -22,12 +22,9 @@ const Navigation = () => {
           </NavLink>
         </div>
       </div>
-      {/* <PrivateRoute exact path='/book-list' component={BookList} />
+      <PrivateRoute exact path='/book-list' component={BookList} />
       <PrivateRoute path='/book-list/:id' component={BookPage} />
-      <PrivateRoute path='/add-review/:id' component={AddReviewForm} /> */}
-      <Route exact path="/book-list" component={BookList} />
-      <Route exact path="/book-list/:id" component={BookPage} />
-      <Route path="/book-list/:id/add-review" component={AddReviewForm} />
+      <PrivateRoute path='/add-review/:id' component={AddReviewForm} />
       <Redirect from="/" to="/book-list" />
     </>
   );
