@@ -6,7 +6,7 @@ import { logout } from "../actions";
 import PrivateRoute from "./PrivateRoute";
 import BookList from "../components/BookList";
 import BookPage from "../components/BookPage";
-import AddReviewForm from "../components/AddReviewForm";
+import ReviewForm from "../components/ReviewForm";
 import NavLogo from "../navlogo.png";
 
 const Navigation = () => {
@@ -23,8 +23,8 @@ const Navigation = () => {
         </div>
       </div>
       <PrivateRoute exact path='/book-list' component={BookList} />
-      <PrivateRoute path='/book-list/:id' component={BookPage} />
-      <PrivateRoute path='/add-review/:id' component={AddReviewForm} />
+      <PrivateRoute exact path='/book-list/:id' component={BookPage} />
+      <PrivateRoute exact path='/book-list/:id/add-review' component={ReviewForm} />
       <Redirect from="/" to="/book-list" />
     </>
   );
