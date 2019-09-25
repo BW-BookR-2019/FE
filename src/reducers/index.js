@@ -1,18 +1,14 @@
 import {
-  LOGIN_START,
+  REQUEST_START,
+  REQUEST_FAILURE,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
-  REGISTER_START,
   REGISTER_SUCCESS,
   REGISTER_FAILURE,
-  GET_START,
-  GET_SUCCESS,
-  GET_FAILURE,
-  DELETE_START,
-  DELETE_SUCCESS,
-  DELETE_FAILURE,
   LOGOUT,
-  logout
+  GET_SUCCESS,
+  DELETE_SUCCESS,
+  ADD_REVIEW_SUCCESS,
 } from "../actions";
 
 const initialState = {
@@ -24,11 +20,17 @@ const initialState = {
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOGIN_START:
+    case REQUEST_START:
       return {
         ...state,
         isFetching: true,
         error: null
+      };
+    case REQUEST_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+        isFetching: false
       };
     case LOGIN_SUCCESS:
       return {
@@ -36,57 +38,44 @@ export const reducer = (state = initialState, action) => {
         isFetching: false,
         isLoggedIn: true
       }
-      case REGISTER_START:
-        return {
-          ...state,
-          isFetching: true,
-          error: null
-        };
-      case REGISTER_SUCCESS:
-        return {
-          ...state,
-          isFetching: false,
-        }
-    case GET_START:
+    case REGISTER_SUCCESS:
       return {
         ...state,
-        isFetching: true,
-        error: null
-      };
+        isFetching: false,
+      }
+    case LOGOUT:
+      return {
+        ...state,
+        isLoggedIn: false,
+        bookList: []
+      }
     case GET_SUCCESS:
       return {
         ...state,
         bookList: action.payload,
         isFetching: false
       };
-    case GET_FAILURE:
-      return {
-        ...state,
-        error: action.payload,
-        isFetching: false
-      };
-    case DELETE_START:
-      return {
-        ...state,
-        isFetching: true,
-        error: null
-      };
     case DELETE_SUCCESS:
       return {
         ...state,
         isFetching: false
       };
-    case DELETE_FAILURE:
+    case ADD_REVIEW_SUCCESS:
       return {
         ...state,
-        error: action.payload,
-        isFetching: false
-      };
-    case LOGOUT:
-      return {
-        ...state,
-        isLoggedIn: false,
-        bookList: []
+        bookList: state.bookList.map(book => {
+          if (book.id === action.payload.id) {
+            return {
+              ...book,
+              reviews: [
+                ...book.reviews,
+                action.payload.review
+              ]
+            }
+          } else {
+            return book
+          }
+        })
       }
     default:
       return state;
