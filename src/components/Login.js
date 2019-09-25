@@ -70,7 +70,7 @@ const Login = ({touched, errors}) => {
 
   return(
 		<>
-			<div className='register-form'>
+			<div className='login-form'>
 				<Form className={classes.container}>
 					<label className='name-container' className={classes.subcontainer}>
 						username 

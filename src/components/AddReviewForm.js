@@ -1,31 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios'
-import ReactHtmlParser from 'react-html-parser';
+import { withFormik, Form, Field } from 'formik';
+import * as Yup from 'yup';
+import { Link } from 'react-router-dom';
+import { TextField } from 'formik-material-ui';
 import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Slider from '@material-ui/core/Slider';
-import Button from '@material-ui/core/Button'
-import { Form } from 'formik'
+import Button from '@material-ui/core/Button';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: 300,
-    color: 'black'
-  },
-  margin: {
-    height: theme.spacing(3),
-    color: 'black'
-  },
-}));
 
-function valuetext(value) {
-  return `${value}`;
-}
+import Rating from './Rating'
 
-const AddReviewForm = (props) => {
-  const classes = useStyles();
-
+const AddReviewForm = (props, {touched, errors}) => {
   let id = props.match.params.id
 
   const [bookData, setBookData] = useState([])
@@ -44,44 +29,41 @@ const AddReviewForm = (props) => {
           })
   }, [id])
 
+  const [review, setReview] = useState({user: '', review: '', rating: ''});
+
+  // const handleChanges = e => {
+  //   setReview({...review, [e.target.name]: e.target.value})
+  // }
+
+  // const submitForm = e => {
+  //   e.preventDefault();
+  //   setReview({user: '', review: '', rating: ''})
+  // }
+
   return(
     <>
-      <h2>Leave a review for: </h2>
-      <img src={bookCover} alt="book cover"/>
-      <h3>{bookData.title}</h3>
-      {bookAuthor.map(item => (
-        <p key={item}> By {item}</p>
-      ))}
-      {/* FIELD: NAME */}
-      {/* RATING */}
-      <div className={classes.root}>
-      
-      <div className={classes.margin} />
-      <Typography id="discrete-slider-small-steps" gutterBottom>
-        Rating:
-      </Typography>
-      <Slider
-        defaultValue={1}
-        getAriaValueText={valuetext}
-        aria-labelledby="discrete-slider-small-steps"
-        step={1}
-        marks
-        min={1}
-        max={5}
-        valueLabelDisplay="auto"
-      />
+      <div className='review-form'>Hello
+        <Form>
+          
+        </Form>
       </div>
-      {/* RATING */}
-      <div>
-        {valuetext === '5' ? console.log('5'):console.log('0')}
-      </div>
-      <i class="far fa-star"></i>
-      <i class="fas fa-star"></i>
-      {/* FIELD: TEXTBOX */}
-      <Button type='submit'>Add Review</Button>
-      <button>Cancel</button>
     </>
   )
-};
+  
+}
 
 export default AddReviewForm;
+
+// {/* 
+//   <h2>Leave a review for: </h2>
+//   <img src={bookCover} alt="book cover"/>
+//   <h3>{bookData.title}</h3>
+//   {bookAuthor.map(item => (
+//     <p key={item}> By {item}</p>
+//   ))}
+//   {/* FIELD: NAME */}
+//   <Rating />
+//   {/* FIELD: TEXTBOX */}
+//   <button>Add Review</button>
+//   <button>Cancel</button>
+//  */}
