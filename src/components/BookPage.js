@@ -3,7 +3,6 @@ import axios from "axios";
 import ReactHtmlParser from "react-html-parser";
 import Ratings from "react-ratings-declarative";
 import { Link } from "react-router-dom";
-import reviews from "../reviewdata";
 import { useSelector, useDispatch } from "react-redux";
 import { getGoogleBookData } from '../actions';
 
@@ -12,6 +11,8 @@ import DeleteModal from "./DeleteModal";
 function BookPage(props) {
   // Uncomment when backend endpoints are up
   // const bookData = useSelector(state => state.bookList.find(book => book.id === props.match.params.id));
+
+  const reviews = useSelector(state => state.dummyReviews)
 
   // * Grabbing dynamic URL id
   const id = props.match.params.id;
