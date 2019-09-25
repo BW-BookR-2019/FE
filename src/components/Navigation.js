@@ -23,8 +23,8 @@ const Navigation = () => {
         </div>
       </div>
       <PrivateRoute exact path='/book-list' component={BookList} />
-      <PrivateRoute path='/book-list/:id' component={BookPage} />
-      <PrivateRoute path='/add-review/:id' component={AddReviewForm} />
+      <PrivateRoute exact path='/book-list/:id' component={BookPage} />
+      <PrivateRoute exact path='/book-list/:id/add-review' component={AddReviewForm} />
       <Redirect from="/" to="/book-list" />
     </>
   );

@@ -67,7 +67,7 @@ function BookPage (props) {
                          <div className="book-buttons">
                           <button>Add To My Books</button>
                           <button>Purchase</button>
-                              <button><Link style={{ color: 'white', textDecoration: 'none' }} to={`/book-list/${id}/add-review`}></Link>Add a Review</button>
+                         <Link to={`/book-list/${id}/add-review`}><button>Add a Review</button></Link>
                          <DeleteModal id={id} history={props.history} />
                          </div>
                           <div className="book-description">
