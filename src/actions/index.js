@@ -9,37 +9,27 @@ export const LOGIN_FAILURE = "LOGIN_FAILURE";
 export const login = (credentials, history) => dispatch => {
   dispatch({ type: LOGIN_START });
   axios
-    .post("https://reqres.in/api/users/", credentials)
+    .post(
+      "https://ks-starthere.herokuapp.com/oauth/token",
+      `grant_type=password&username=${credentials.username}&password=${credentials.password}`,
+      {
+        headers: {
+          Authorization: `Basic ${btoa("lambda-client:lambda-secret")}`,
+          "Content-Type": "application/x-www-form-urlencoded"
+        }
+      }
+    )
     .then(res => {
-      console.log(res);
-      localStorage.setItem("token", res.data);
-      dispatch({ type: LOGIN_SUCCESS });
-      history.push("/book-list");
+      console.log(res)
+      localStorage.setItem("token", res.data.access_token)
+      dispatch({ type: LOGIN_SUCCESS })
+      history.push('/book-list')
     })
-  .catch(err => {
-    console.log(err);
-    // TODO: add error handling
-    // dispatch({ type: LOGIN_FAILURE })
-  });
-
-  // TODO: uncomment when backend is deployed
-  // axios
-  //   .post(
-  //     "https://jondscott21-internationschool.herokuapp.com/login",
-  //     `grant_type=password&username=${credentials.email}&password=${credentials.password}`,
-  //     {
-  //       headers: {
-  //         Authorization: `Basic ${btoa("lambda-client:lambda-secret")}`,
-  //         "Content-Type": "application/x-www-form-urlencoded"
-  //       }
-  //     }
-  //   )
-  //   .then(res => localStorage.setItem("token", res.data.access_token))
-  //   .catch(err => {
-  //     console.log(err)
-  //     // TODO: add error handling
-  //     // dispatch({ type: LOGIN_FAILURE })
-  //   });
+    .catch(err => {
+      console.log(err)
+      // TODO: add error handling
+      // dispatch({ type: LOGIN_FAILURE })
+    });
 };
 
 export const REGISTER_START = "REGISTER_START";
@@ -49,15 +39,13 @@ export const REGISTER_FAILURE = "REGISTER_FAILURE";
 export const register = (credentials, history) => dispatch => {
   dispatch({ type: REGISTER_START });
   axios
-    .post("https://reqres.in/api/users/", credentials)
+    .post("https://ks-starthere.herokuapp.com/createnewuser", credentials)
     .then(res => {
-      console.log(res);
-      localStorage.setItem("token", res.data);
       dispatch({ type: REGISTER_SUCCESS });
-      history.push("/book-list");
+      history.push("/login");
     })
     .catch(err => {
-      console.log(err);
+      console.log(err.response);
       // TODO: add error handling
       // dispatch({ type: REGISTER_FAILURE })
     });
