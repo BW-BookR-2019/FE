@@ -78,10 +78,9 @@ body{
 }
 .book-list-item{
   width:18.5%;
-  height:280px;
-  margin:10px .55%;
+  height:300px;
+  margin:15px .55%;
   text-align:center;
-  overflow:auto;
 }
 .book-list-item img{
   width:138px;
@@ -100,15 +99,28 @@ body{
   font-size:14px;
   margin:3px;
   opacity:0.8;
+  margin-bottom:8px;
 }
 
 .book-subtitle{
   font-style: italic;
   text-align:center;
 }
+.purchase-button{
+  text-decoration:none;
+  color:white;
+  font-size:14px;
+  padding:3px 20px;
+  background-color:#f3bb01;
+  color:black;
+  border-radius:5px;
+}
+.purchase-button:hover{
+  background-color:#f2cc52;
+}
 
 
-/* * Book Review styling */
+/* * Book Review Bottom-Header styling */
 .review-container{
   overflow:hidden;
   height:300px;
@@ -148,7 +160,6 @@ body{
   max-width:1000px;
   margin:0 auto;
 
-  overflow:scroll;
   margin-top:30px;
 }
 .book-content-container h3{
@@ -164,22 +175,48 @@ body{
 .book-content-container p{
   margin:10px;
 }
+
+.book-buttons{
+  display:flex;
+}
 .book-content-container button{
-  padding:13px;
+  padding:8px 15px;
   margin:0 20px;
-  background-color:#d14f2b;
-  color:white;
+  background-color:#f3bb01;
+  color:black;
   border:none;
   margin-top:20px;
+  border-radius:10px;
+  font-size:15px;
+}
+.book-content-container button:hover{
+  background-color:#f2cc52;
 }
 
 .book-cover{
   margin-right:30px;
 }
 .book-description{
-  border-top:1px solid white;
   margin-top:20px;
   padding:10px;
   opacity:.9;
 }
-
+.review-section{
+  max-width:1000px;
+  margin:0 auto;
+}
+.review-section p{
+  margin-top:0;
+  margin-bottom:20px;
+  margin:0 20px 25px 10px;
+}
+.review-section h2{
+  font-size:2rem;
+  color:white;
+  text-align:center;
+  border-top:1px solid #f3bb01;
+  padding-top:20px;
+}
+.review-content-section{
+  margin:0;
+}
