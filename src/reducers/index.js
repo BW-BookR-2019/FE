@@ -9,10 +9,12 @@ import {
   GET_SUCCESS,
   DELETE_SUCCESS,
   ADD_REVIEW_SUCCESS,
+  GET_GOOGLE_BOOK_DATA_SUCCESS
 } from "../actions";
 
 const initialState = {
   bookList: [],
+  googleBookData: null,
   isFetching: false,
   error: null,
   isLoggedIn: false
@@ -76,6 +78,12 @@ export const reducer = (state = initialState, action) => {
             return book
           }
         })
+      }
+    case GET_GOOGLE_BOOK_DATA_SUCCESS:
+      return {
+        ...state,
+        googleBookData: action.payload,
+        isFetching: false
       }
     default:
       return state;
