@@ -6,7 +6,9 @@ class Rating extends React.Component {
   constructor() {
     super();
 
-    
+    this.state = {
+      rating: 1
+    };
   }
 
   onStarClick(nextValue, prevValue, name) {
@@ -18,7 +20,6 @@ class Rating extends React.Component {
     
     return (                
       <div>
-        <h2>Rating from state: {rating}</h2>
         <StarRatingComponent 
           name="rate1" 
           starCount={5}
