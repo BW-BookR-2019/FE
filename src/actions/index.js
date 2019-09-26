@@ -1,13 +1,14 @@
-// import { axiosWithAuth } from "../utils/axiosWithAuth";
-import axios from "axios";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import axios from "axios";
 
-export const LOGIN_START = "LOGIN_START";
+export const REQUEST_START = "REQUEST_START";
+export const REQUEST_FAILURE = "REQUEST_FAILURE";
+
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
 
 export const login = (credentials, history) => dispatch => {
-  dispatch({ type: LOGIN_START });
+  dispatch({ type: REQUEST_START });
   axios
     .post(
       "https://ks-starthere.herokuapp.com/oauth/token",
@@ -20,24 +21,23 @@ export const login = (credentials, history) => dispatch => {
       }
     )
     .then(res => {
-      console.log(res)
-      localStorage.setItem("token", res.data.access_token)
-      dispatch({ type: LOGIN_SUCCESS })
-      history.push('/book-list')
+      console.log(res);
+      localStorage.setItem("token", res.data.access_token);
+      dispatch({ type: LOGIN_SUCCESS });
+      history.push("/book-list");
     })
     .catch(err => {
-      console.log(err)
+      console.log(err.response);
       // TODO: add error handling
       // dispatch({ type: LOGIN_FAILURE })
     });
 };
 
-export const REGISTER_START = "REGISTER_START";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAILURE = "REGISTER_FAILURE";
 
 export const register = (credentials, history) => dispatch => {
-  dispatch({ type: REGISTER_START });
+  dispatch({ type: REQUEST_START });
   axios
     .post("https://ks-starthere.herokuapp.com/createnewuser", credentials)
     .then(res => {
@@ -51,31 +51,28 @@ export const register = (credentials, history) => dispatch => {
     });
 };
 
-export const GET_START = "GET_START";
 export const GET_SUCCESS = "GET_SUCCESS";
-export const GET_FAILURE = "GET_FAILURE";
 
 export const getBookList = () => dispatch => {
-  // dispatch({ type: GET_START });
+  // dispatch({ type: REQUEST_START });
   // TODO: add axios get request endpoint
-  // axiosWithAuth().get(`/get/endpoint/here`)
-  //   .then(res => {
-  //     console.log(res)
-  //     dispatch({ type: GET_SUCCESS })
-  //   })
-  //   .catch(err => {
-  //     console.log(err)
-  //     dispatch({ type: GET_FAILURE })
-  //   })
+  axiosWithAuth()
+    .get(`https://ks-starthere.herokuapp.com/users/users`)
+    .then(res => {
+      console.log(res);
+      // dispatch({ type: GET_SUCCESS, payload: res.data })
+    })
+    .catch(err => {
+      console.log(err);
+      // dispatch({ type: REQUEST_FAILURE, payload: err.response })
+    });
 };
 
-export const DELETE_START = "DELETE_START";
 export const DELETE_SUCCESS = "DELETE_SUCCESS";
-export const DELETE_FAILURE = "DELETE_FAILURE";
 
 export const deleteBook = (id, history) => dispatch => {
-  console.log(`book with id: ${id} deleting...`)
-  // dispatch({ type: DELETE_START });
+  console.log(`book with id: ${id} deleting...`);
+  // dispatch({ type: REQUEST_START });
   // TODO: add axios DELETE request endpoint
   // axiosWithAuth().delete(`/delete/endpoint/here/${id}`)
   //   .then(res => {
@@ -85,14 +82,52 @@ export const deleteBook = (id, history) => dispatch => {
   //   })
   //   .catch(err => {
   //     console.log(err)
-  //     dispatch({ type: DELETE_FAILURE })
+  //     dispatch({ type: REQUEST_FAILURE })
   //   })
 };
 
 export const LOGOUT = "LOGOUT";
 
 export const logout = () => {
-  console.log(`loggin out...`)
+  console.log(`loggin out...`);
   localStorage.clear();
-  return { type: LOGOUT }
+  return { type: LOGOUT };
+};
+
+export const ADD_REVIEW_SUCCESS = "ADD_REVIEW_SUCCESS";
+
+export const addReview = (id, history) => dispatch => {
+  console.log(`adding review...`);
+  // dispatch({ type: REQUEST_START });
+  // TODO: add axios POST request endpoint
+  // axiosWithAuth().post(`/post/endpoint/here/`)
+  //   .then(res => {
+  //     console.log(res)
+  //     dispatch({ type: ADD_REVIEW_SUCCESS })
+  //     history.push(`/book-list/${id}`)
+  //   })
+  //   .catch(err => {
+  //     console.log(err)
+  //     dispatch({ type: REQUEST_FAILURE, payload: err.response })
+  //   })
+};
+
+export const GET_GOOGLE_BOOK_DATA_SUCCESS = "GET_GOOGLE_BOOK_DATA_SUCCESS";
+
+export const getGoogleBookData = id => dispatch => {
+  dispatch({ type: REQUEST_START })
+  axios
+    .get(`https://www.googleapis.com/books/v1/volumes/${id}`)
+    .then(res => {
+      // console.log(response.data.volumeInfo);
+      // const data = response.data.volumeInfo;
+      // setBookData(data);
+      // setBookAuthor(response.data.volumeInfo.authors);
+      // setBookCover(
+      //   response.data.volumeInfo.imageLinks.small ||
+      //     response.data.volumeInfo.imageLinks.thumbnail
+      // );
+      dispatch({ type: GET_GOOGLE_BOOK_DATA_SUCCESS, payload: res.data.volumeInfo })
+    })
+    .catch(err => console.log(err))
 };
