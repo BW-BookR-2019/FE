@@ -4,7 +4,7 @@ import ReactHtmlParser from "react-html-parser";
 import Ratings from "react-ratings-declarative";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getGoogleBookData } from "../actions";
+import { getGoogleBookData, addReview } from "../actions";
 
 import DeleteModal from "./DeleteModal";
 
@@ -25,6 +25,10 @@ function BookPage(props) {
   useEffect(() => {
     dispatch(getGoogleBookData(id));
   }, []);
+
+  const callAddReview = () => {
+    dispatch(addReview());
+  }
 
   return (
     <div>
