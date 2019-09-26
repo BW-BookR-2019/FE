@@ -15,7 +15,7 @@ export const login = (credentials, history) => dispatch => {
       `grant_type=password&username=${credentials.username}&password=${credentials.password}`,
       {
         headers: {
-          Authorization: `Basic ${btoa("lambda-client:lambda-secret")}`,
+          Authorization: `Basic ${btoa("beardown:downbear")}`,
           "Content-Type": "application/x-www-form-urlencoded"
         }
       }
@@ -54,20 +54,20 @@ export const register = (credentials, history) => dispatch => {
 
 export const GET_SUCCESS = "GET_SUCCESS";
 
-export const getBookList = () => dispatch => {
-  // dispatch({ type: REQUEST_START });
-  // TODO: add axios get request endpoint
-  axiosWithAuth()
-    .get(`https://ks-starthere.herokuapp.com/users/users`)
-    .then(res => {
-      console.log(res);
-      // dispatch({ type: GET_SUCCESS, payload: res.data })
-    })
-    .catch(err => {
-      console.log(err);
-      // dispatch({ type: REQUEST_FAILURE, payload: err.response })
-    });
-};
+// export const getBookList = () => dispatch => {
+//   // dispatch({ type: REQUEST_START });
+//   // TODO: add axios get request endpoint
+//   axiosWithAuth()
+//     .get(`/books/endpoint/here`)
+//     .then(res => {
+//       console.log(res);
+//       // dispatch({ type: GET_SUCCESS, payload: res.data })
+//     })
+//     .catch(err => {
+//       console.log(err);
+//       // dispatch({ type: REQUEST_FAILURE, payload: err.response })
+//     });
+// };
 
 export const DELETE_SUCCESS = "DELETE_SUCCESS";
 
@@ -96,22 +96,22 @@ export const logout = () => {
 };
 
 export const ADD_REVIEW_SUCCESS = "ADD_REVIEW_SUCCESS";
-
-// export const addReview = (id, history, review) => dispatch => {
+// // id, history, 
+// export const addReview = (review) => dispatch => {
 //   console.log(`adding review...`);
 
 //   // dispatch({ type: REQUEST_START });
 //   // TODO: add axios POST request endpoint
-//   // axiosWithAuth().post(`/post/endpoint/here/`)
-//   //   .then(res => {
-//   //     console.log(res)
-//   //     dispatch({ type: ADD_REVIEW_SUCCESS, payload: { id: id, review: review} })
-//   //     history.push(`/book-list/${id}`)
-//   //   })
-//   //   .catch(err => {
-//   //     console.log(err)
-//   //     dispatch({ type: REQUEST_FAILURE, payload: err.response })
-//   //   })
+//   axiosWithAuth().post(`/review/review`, review)
+//     .then(res => {
+//       console.log(res)
+//       // dispatch({ type: ADD_REVIEW_SUCCESS, payload: { id: id, review: review} })
+//       // history.push(`/book-list/${id}`)
+//     })
+//     .catch(err => {
+//       console.log(err.response)
+//       // dispatch({ type: REQUEST_FAILURE, payload: err.response })
+//     })
 // };
 
 export const addReview = (review) => {
@@ -125,7 +125,7 @@ export const getGoogleBookData = id => dispatch => {
   axios
     .get(`https://www.googleapis.com/books/v1/volumes/${id}`)
     .then(res => {
-      // console.log(response.data.volumeInfo);
+      console.log(res.data.detail);
       // const data = response.data.volumeInfo;
       // setBookData(data);
       // setBookAuthor(response.data.volumeInfo.authors);
@@ -133,7 +133,7 @@ export const getGoogleBookData = id => dispatch => {
       //   response.data.volumeInfo.imageLinks.small ||
       //     response.data.volumeInfo.imageLinks.thumbnail
       // );
-      dispatch({ type: GET_GOOGLE_BOOK_DATA_SUCCESS, payload: { volumeInfo: res.data.volumeInfo, id: res.data.id } })
+      dispatch({ type: GET_GOOGLE_BOOK_DATA_SUCCESS, payload: { volumeInfo: res.data.volumeInfo, id: res.data.id, saleInfo: res.data.saleInfo } })
     })
     .catch(err => console.log(err))
 };

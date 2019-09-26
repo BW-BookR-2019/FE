@@ -58,11 +58,22 @@ function BookPage(props) {
               ))}
             </div>
             <div className="book-buttons">
-              <button>Add To My Books</button>
-              <button>Purchase</button>
+              {/* <button>Add To My Books</button> */}
+              {googleBookData.saleInfo.saleability === "FOR_SALE" && (
+                <a href={googleBookData.saleInfo.buyLink}>
+                  <button>Purchase</button>
+                </a>
+              )}
               <Link to={`/book-list/${id}/add-review`}>
                 <button>Add a Review</button>
               </Link>
+              {/* <button
+                onClick={() =>
+                  dispatch(addReview({ review: "fkjfl", rating: 2 }))
+                }
+              >
+                Add review fake
+              </button> */}
               <DeleteModal id={id} history={props.history} />
             </div>
             <div className="book-description">
