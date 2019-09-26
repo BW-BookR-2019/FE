@@ -14,26 +14,43 @@ const ReviewForm = ({match, touched, errors}) => {
   const useStyles = makeStyles(() => ({
     container: {
       display: 'flex',
-      // flexDirection: 'column',
       border: '2px solid #cf4e28',
       // borderRadius: '1%',
       margin: '0 auto',
-      width: '50%',
+      width: '100%',
       // padding: '3% 1% 1% 1%'
-      flexWrap: 'wrap'
     },
-  //   subcontainer: {
-  //     display: 'flex',
+    form: {
+      display: 'flex',
+      flexDirection: 'column',
+      border: '2px solid skyblue',
+      width: '50%',
+      flexWrap: 'wrap',
+      justifyContent: 'space-between'
+    },
+    formItems: {
+      border: '2px solid white',
+      display: 'flex',
+      flexDirection: 'column'
+    },
+    bookinfo: {
+      border: '2px solid yellow',
+      width: '50%'
+    },
+    buttonContainer: {
+      border: '2px solid pink',
+      display: 'flex',
+      alignContent: 'flex-end',
+      justifyContent: 'flex-end'
+    },
+    subcontainer: {
+      display: 'flex',
   //     justifyContent: 'center',
-  //     flexDirection: 'column',
+      flexDirection: 'column',
   //     textAlign: 'left',
   //     width: '60%',
   //     margin: '1% auto',
-  //   },
-  //   items: {
-  //     margin: '3% auto',
-  //     textAlign: 'center'
-  //   },
+    },
   //   link: {
   //     textDecoration: 'none',
   //     color: 'white',
@@ -43,27 +60,28 @@ const ReviewForm = ({match, touched, errors}) => {
   //       transition: '0.3s'
   //     }
   //   },
-  //   btn: {
-  //     textTransform: 'lowercase',
-  //     color: 'white',
-  //     borderColor: 'white',
-  //     backgroundColor: '#edb901',
-  //     '&:hover': {
-  //       backgroundColor: '#cf4e28',
-  //       transition: '0.3s'
-  //     }
-  //   },
-  //   inputOutline: {
-  //     backgroundColor: 'white',
-  //     borderRadius: '0.25rem',
-  //     '&$focusedOutline $notchedOutline' : {
-  //       borderColor: '#cf4e28 !important'
-  //     },
-  //   },
-  //   focusedOutline: {},
-  //   notchedOutline: {
-  //     border: '2px solid #edb901',
-  //   }
+    btn: {
+      textTransform: 'lowercase',
+      color: 'white',
+      borderColor: 'white',
+      backgroundColor: '#edb901',
+      width: '50%',
+      '&:hover': {
+        backgroundColor: '#cf4e28',
+        transition: '0.3s'
+      }
+    },
+    inputOutline: {
+      backgroundColor: 'white',
+      borderRadius: '0.25rem',
+      '&$focusedOutline $notchedOutline' : {
+        borderColor: '#cf4e28 !important'
+      },
+    },
+    focusedOutline: {},
+    notchedOutline: {
+      border: '2px solid #edb901',
+    }
   }))
 
 // BUILDING FORM
@@ -100,65 +118,70 @@ const ReviewForm = ({match, touched, errors}) => {
   return(
     <>
       <div className='review-form' className={classes.container}>
-        <h2>Leave a review for: </h2>
-        <img src={bookCover} className={classes.book} alt="book cover"/>
-        <h3>{bookData.title}</h3>
-        {bookAuthor.map(item => (
+        <div className={classes.bookinfo}>
+          <h2>Leave a review for: </h2>
+          <img src={bookCover} className={classes.book} alt="book cover"/>
+          <h3>{bookData.title}</h3>
+          {bookAuthor.map(item => (
           <p key={item}> By {item}</p>
-        ))}
-        <Rating />
-        <Form onSubmit={submitForm}>
-          <label className='username-container'>
-            username
-            <Field
-              type='text'
-              name='username'
-              value={review.username}
-              onChange={handleChanges}
-              component={TextField}
-              variant="outlined"
-              margin='dense'
-              helperText={(touched.username && errors.username) && errors.username}
-						  InputProps={{
-                classes: {
-                  root: classes.inputOutline,
-                  focused: classes.focusedOutline,
-                  notchedOutline: classes.notchedOutline
-                }
-						  }}
-            />
-          </label>
+          ))}
+        </div>
 
-          <label className='review-container'>
-            review
-            <Field
-              component='textarea'
-              type='text'
-              name='review'
-              value={review.review}
-              onChange={handleChanges}
-              component={TextField}
-              variant="outlined"
-              margin='dense'
-              helperText={(touched.username && errors.username) && errors.username}
-						  InputProps={{
-                classes: {
-                  root: classes.inputOutline,
-                  focused: classes.focusedOutline,
-                  notchedOutline: classes.notchedOutline
-                }
-						  }}
-            />
-          </label>
+        <div className='reviewformContainer' className={classes.form}>
+          <Form className={classes.formItems} onSubmit={submitForm}>
+          <Rating />
+            <label className='username-container' className={classes.subcontainer}>
+              username
+              <Field
+                type='text'
+                name='username'
+                value={review.username}
+                onChange={handleChanges}
+                component={TextField}
+                variant="outlined"
+                margin='dense'
+                helperText={(touched.username && errors.username) && errors.username}
+                InputProps={{
+                  classes: {
+                    root: classes.inputOutline,
+                    focused: classes.focusedOutline,
+                    notchedOutline: classes.notchedOutline
+                  }
+                }}
+              />
+            </label>
 
-          <label className='accept-btn' className={classes.items}>
-            <Link to={`/book-list/${id}`}><Button className={classes.btn} variant='outlined' size='medium' type='submit'>add review</Button></Link>
-          </label>
-
-          <label className='cancel-btn' className={classes.items}>
-            <Link to={`/book-list/${id}`}><Button className={classes.btn} variant='outlined' size='medium' type='submit'>cancel</Button></Link>
-          </label>
-        </Form>
+            <label className='review-container' className={classes.subcontainer}>
+              review
+              <Field
+                type='text'
+                name='review'
+                value={review.review}
+                onChange={handleChanges}
+                component={TextField}
+                variant="outlined"
+                margin='dense'
+                multiline={true}
+                rows={10}
+                rowsMax={10}
+                helperText={(touched.username && errors.username) && errors.username}
+                InputProps={{
+                  classes: {
+                    root: classes.inputOutline,
+                    focused: classes.focusedOutline,
+                    notchedOutline: classes.notchedOutline
+                  }
+                }}
+              />
+            </label>  
+          </Form>
+          <div className={classes.buttonContainer}>
+            <label className='buttons'>
+              <Link className={classes.link} to={`/book-list/${id}`}><Button className={classes.btn} variant='outlined' size='medium' type='submit'>add review</Button></Link>
+              <Link className={classes.link} to={`/book-list/${id}`}><Button className={classes.btn} variant='outlined' size='medium' type='submit'>cancel</Button></Link>
+            </label>
+          </div>
+        </div>
       </div>
     </>
   )
