@@ -157,9 +157,10 @@ const FormikRegister = withFormik({
 			.required('password is required')
 	}),
 
-	handleSubmit(values, { props }){
+	handleSubmit(values, { props, resetForm }){
 		console.log('hitting handleSubmit')
-		props.register(values, props.history);
+    props.register(values, props.history);
+    resetForm();
 	}
 })(Register);
 
