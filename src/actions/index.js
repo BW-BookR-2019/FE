@@ -12,6 +12,7 @@ export const login = (credentials, history) => dispatch => {
   axios
     .post(
       "https://ks-starthere.herokuapp.com/oauth/token",
+      // "https://realwillbrooks-bookr.herokuapp.com/login",
       `grant_type=password&username=${credentials.username}&password=${credentials.password}`,
       {
         headers: {
@@ -44,9 +45,11 @@ export const register = (credentials, history) => dispatch => {
   dispatch({ type: REQUEST_START });
   axios
     .post("https://ks-starthere.herokuapp.com/createnewuser", credentials)
+    // .post('https://realwillbrooks-bookr.herokuapp.com/createnewuser', credentials)
     .then(res => {
       dispatch({ type: REGISTER_SUCCESS });
       history.push("/login");
+      console.log(res)
     })
     .catch(err => {
       console.log(err.response);
@@ -140,3 +143,9 @@ export const getGoogleBookData = id => dispatch => {
     })
     .catch(err => console.log(err))
 };
+
+export const SET_RATING = 'SET_RATING';
+
+export const setRating = (rating) => {
+  return ({ type: SET_RATING, payload: rating })
+}

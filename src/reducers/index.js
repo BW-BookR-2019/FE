@@ -9,7 +9,8 @@ import {
   GET_SUCCESS,
   DELETE_SUCCESS,
   ADD_REVIEW_SUCCESS,
-  GET_GOOGLE_BOOK_DATA_SUCCESS
+  GET_GOOGLE_BOOK_DATA_SUCCESS,
+  SET_RATING
 } from "../actions";
 
 const initialState = {
@@ -20,6 +21,7 @@ const initialState = {
   isLoggedIn: false,
   user: null,
   reviews: null,
+  rating: 1,
   dummyReviews: [
     {
       user: " Maria R.",
@@ -115,6 +117,11 @@ export const reducer = (state = initialState, action) => {
         googleBookData: action.payload,
         isFetching: false
       };
+    case SET_RATING:
+      return {
+        ...state,
+        rating: action.payload
+      }
     default:
       return state;
   }
