@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import { NavLink, Route, Redirect } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -14,7 +15,7 @@ const Navigation = props => {
   return (
     <>
       <div className="nav">
-        <NavLink exact to="/book-list"><img className="logo" src={NavLogo} /></NavLink>
+        <NavLink exact to="/book-list"><img className="logo" src={NavLogo} alt='Bookr Logo'/></NavLink>
         <div className="nav-links">
           <NavLink to="/book-list">Book List</NavLink>
           <NavLink to="/login" onClick={() => dispatch(logout())}>
