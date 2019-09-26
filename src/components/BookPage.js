@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ReactHtmlParser from "react-html-parser";
@@ -94,7 +96,7 @@ function BookPage(props) {
             <p>"{item.review}"</p>
           </div>
         ))}
-        {/* Uncomment when backent endpoints are up */}
+        {/* Uncomment when backend endpoints are up */}
         {/* {bookData.reviews.map(item => (
           <div className="review-section">
             <h3 className="review-content-section">
