@@ -124,10 +124,10 @@ body{
   padding:3px 20px;
   background-color:#f3bb01;
   border-radius:5px;
-  border: 1px solid white
+  border: 1px solid white;
 }
 .purchase-button:hover{
-   background-color:#cf4e28;
+  background-color:#cf4e28;
   color:white;
 	transition: 0.3s
 }
