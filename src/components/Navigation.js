@@ -9,14 +9,12 @@ import BookPage from "../components/BookPage";
 import ReviewForm from "../components/ReviewForm";
 import NavLogo from "../navlogo.png";
 
-import Loader from '../Loader'
-
 const Navigation = props => {
   const dispatch = useDispatch();
   return (
     <>
       <div className="nav">
-        <img className="logo" src={NavLogo} />
+        <NavLink exact to="/book-list"><img className="logo" src={NavLogo} /></NavLink>
         <div className="nav-links">
           <NavLink to="/book-list">Book List</NavLink>
           <NavLink to="/login" onClick={() => dispatch(logout())}>
@@ -24,11 +22,10 @@ const Navigation = props => {
           </NavLink>
         </div>
       </div>
-      <Route exact path ='/' component={Loader}></Route>
       <PrivateRoute exact path='/book-list' component={BookList} />
       <PrivateRoute exact path='/book-list/:id' component={BookPage} />
       <PrivateRoute exact path='/book-list/:id/add-review' component={ReviewForm} />
-      {/* {props.location.pathname === '/' && <Redirect from="/" to="/book-list" />} */}
+      {props.location.pathname === '/' && <Redirect from="/" to="/book-list" />}
     </>
   );
 };

@@ -7,11 +7,12 @@ body{
 
 .nav{
   background-color:#f3bb01;
-  height:30px;
+  height:35px;
   padding:5px;
   margin-bottom:30px;
   display:flex;
   justify-content:space-between;
+  align-items:center;
 }
 
 .nav a{
@@ -27,7 +28,8 @@ body{
 }
 
 .logo{
-  height:30px;
+  height:35px;
+  padding:5px 0;
 }
 
 /* * General styling for entire form */
@@ -41,6 +43,9 @@ body{
   width:100%;
   margin:0 auto;
 }
+
+
+
 .search-form{
   height:30px;
   width:400px;
@@ -64,6 +69,7 @@ body{
 }
 .search-button:hover{
   background-color:#f25a30;
+  transition:0.3s;
 }
 
 
@@ -75,6 +81,7 @@ body{
   justify-content:space-between;
   align-content:center;
   font-family: 'Cabin', sans-serif;
+  width:100%;
 }
 .book-list-item{
   width:18.5%;
@@ -83,8 +90,10 @@ body{
   text-align:center;
 }
 .book-list-item img{
-  width:138px;
-  height:160px;
+  /* width:138px; */
+  width:74%;
+  height:53%;
+  /* height:160px; */
 }
 
 .book-list-item h3{
@@ -99,7 +108,7 @@ body{
   font-size:14px;
   margin:3px;
   opacity:0.8;
-  margin-bottom:8px;
+  margin-bottom:10px;
 }
 
 .book-subtitle{
@@ -116,7 +125,9 @@ body{
   border-radius:5px;
 }
 .purchase-button:hover{
-  background-color:#f2cc52;
+   background-color:#cf4e28;
+  color:white;
+	transition: 0.3s
 }
 
 
@@ -190,7 +201,9 @@ body{
   font-size:15px;
 }
 .book-content-container button:hover{
-  background-color:#f2cc52;
+  background-color:#cf4e28;
+  color:white;
+	transition: 0.3s
 }
 
 .book-cover{
@@ -199,7 +212,6 @@ body{
 .book-description{
   margin-top:20px;
   padding:10px;
-  opacity:.9;
 }
 .review-section{
   max-width:1000px;
@@ -219,4 +231,11 @@ body{
 }
 .review-content-section{
   margin:0;
+}
+.login-logo{
+  height:50%;
+  width:50%;
+  display:flex;
+  margin:0 auto;
+  margin-bottom:10px;
 }

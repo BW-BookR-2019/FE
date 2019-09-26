@@ -7,7 +7,8 @@ import * as Yup from 'yup';
 import { TextField } from 'formik-material-ui';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import { PushSpinner } from "react-spinners-kit";
+import NavLogo from "../navlogo.png";
+import { CircleSpinner } from "react-spinners-kit";
 
 
 const Login = ({touched, errors}) => {
@@ -18,7 +19,7 @@ const Login = ({touched, errors}) => {
 		container: {
 			display: 'flex',
 			flexDirection: 'column',
-			border: '2px solid #cf4e28',
+			border: '2px solid #f3bb01',
 			borderRadius: '1%',
 			margin: '8% auto',
 			width: '30%',
@@ -48,8 +49,7 @@ const Login = ({touched, errors}) => {
 		btn: {
 			textTransform: 'lowercase',
 			color: 'white',
-			borderColor: 'white',
-			backgroundColor: '#edb901',
+			backgroundColor: '#f3bb01',
 			'&:hover': {
 				backgroundColor: '#cf4e28',
 				transition: '0.3s'
@@ -71,21 +71,21 @@ const Login = ({touched, errors}) => {
 	// BUILDING FORM
 	const classes = useStyles();
 
-	
 	if(isFetching === true) 
 		return(
-			<PushSpinner
-			style={{margin: '0 auto'}}
-			size={30}
-			color="#686769"
-			// loading={loading}
-		/>
+			<div style={{width: '8%', position: 'absolute', top: '50%', left: '46%'}}>
+      <CircleSpinner
+      size={50}
+      color="#f3bb01"
+      />
+    	</div>
 		)
 
   return(
 		<>
 			<div className='login-form'>
 				<Form className={classes.container}>
+				  <img src={NavLogo} alt="logo" className="login-logo" />
 					<label className='name-container' className={classes.subcontainer}>
 						username 
 						<Field
