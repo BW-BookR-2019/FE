@@ -7,9 +7,68 @@ import { TextField } from 'formik-material-ui';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Rating from './Rating'
+import clsx from 'clsx'
 
-const ReviewForm = (props) => {
-  let id = props.match.params.id
+const ReviewForm = ({match, touched, errors}) => {
+  // STYLING
+  const useStyles = makeStyles(() => ({
+    container: {
+      display: 'flex',
+      // flexDirection: 'column',
+      border: '2px solid #cf4e28',
+      // borderRadius: '1%',
+      margin: '0 auto',
+      width: '50%',
+      // padding: '3% 1% 1% 1%'
+      flexWrap: 'wrap'
+    },
+  //   subcontainer: {
+  //     display: 'flex',
+  //     justifyContent: 'center',
+  //     flexDirection: 'column',
+  //     textAlign: 'left',
+  //     width: '60%',
+  //     margin: '1% auto',
+  //   },
+  //   items: {
+  //     margin: '3% auto',
+  //     textAlign: 'center'
+  //   },
+  //   link: {
+  //     textDecoration: 'none',
+  //     color: 'white',
+  //     transition: '0.5s',
+  //     '&:hover': {
+  //       color: '#edb901',
+  //       transition: '0.3s'
+  //     }
+  //   },
+  //   btn: {
+  //     textTransform: 'lowercase',
+  //     color: 'white',
+  //     borderColor: 'white',
+  //     backgroundColor: '#edb901',
+  //     '&:hover': {
+  //       backgroundColor: '#cf4e28',
+  //       transition: '0.3s'
+  //     }
+  //   },
+  //   inputOutline: {
+  //     backgroundColor: 'white',
+  //     borderRadius: '0.25rem',
+  //     '&$focusedOutline $notchedOutline' : {
+  //       borderColor: '#cf4e28 !important'
+  //     },
+  //   },
+  //   focusedOutline: {},
+  //   notchedOutline: {
+  //     border: '2px solid #edb901',
+  //   }
+  }))
+
+// BUILDING FORM
+  const classes = useStyles();
+  let id = match.params.id
 
   const [bookData, setBookData] = useState([])
   const [bookAuthor, setBookAuthor] = useState([])
@@ -40,42 +99,64 @@ const ReviewForm = (props) => {
 
   return(
     <>
-      <div className='review-form'>
-      <h2>Leave a review for: </h2>
-      <img src={bookCover} alt="book cover"/>
-      <h3>{bookData.title}</h3>
-      {bookAuthor.map(item => (
-        <p key={item}> By {item}</p>
-      ))}
+      <div className='review-form' className={classes.container}>
+        <h2>Leave a review for: </h2>
+        <img src={bookCover} className={classes.book} alt="book cover"/>
+        <h3>{bookData.title}</h3>
+        {bookAuthor.map(item => (
+          <p key={item}> By {item}</p>
+        ))}
         <Rating />
         <Form onSubmit={submitForm}>
           <label className='username-container'>
-            Username
+            username
             <Field
               type='text'
               name='username'
               value={review.username}
               onChange={handleChanges}
+              component={TextField}
+              variant="outlined"
+              margin='dense'
+              helperText={(touched.username && errors.username) && errors.username}
+						  InputProps={{
+                classes: {
+                  root: classes.inputOutline,
+                  focused: classes.focusedOutline,
+                  notchedOutline: classes.notchedOutline
+                }
+						  }}
             />
           </label>
 
           <label className='review-container'>
-            Review
+            review
             <Field
               component='textarea'
               type='text'
               name='review'
               value={review.review}
               onChange={handleChanges}
+              component={TextField}
+              variant="outlined"
+              margin='dense'
+              helperText={(touched.username && errors.username) && errors.username}
+						  InputProps={{
+                classes: {
+                  root: classes.inputOutline,
+                  focused: classes.focusedOutline,
+                  notchedOutline: classes.notchedOutline
+                }
+						  }}
             />
           </label>
 
-          <label className='accept-btn'>
-            <Link to={`/book-list/${id}`}><Button>Add Review</Button></Link>
+          <label className='accept-btn' className={classes.items}>
+            <Link to={`/book-list/${id}`}><Button className={classes.btn} variant='outlined' size='medium' type='submit'>add review</Button></Link>
           </label>
 
-          <label className='cancel-btn'>
-            <Link to={`/book-list/${id}`}><Button>Cancel</Button></Link>
+          <label className='cancel-btn' className={classes.items}>
+            <Link to={`/book-list/${id}`}><Button className={classes.btn} variant='outlined' size='medium' type='submit'>cancel</Button></Link>
           </label>
         </Form>
       </div>
