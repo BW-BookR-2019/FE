@@ -53,6 +53,7 @@ body{
   border-bottom-left-radius:13px;
   padding:4px;
   border:none;
+  outline:none;
 }
 
 
@@ -66,6 +67,7 @@ body{
   border:none;
   color:white;
   font-size:15px;
+  outline:none;
 }
 .search-button:hover{
   background-color:#f25a30;
@@ -121,8 +123,8 @@ body{
   font-size:14px;
   padding:3px 20px;
   background-color:#f3bb01;
-  color:black;
   border-radius:5px;
+  border: 1px solid white
 }
 .purchase-button:hover{
    background-color:#cf4e28;
@@ -140,27 +142,32 @@ body{
   background: url(https://images.unsplash.com/photo-1526721940322-10fb6e3ae94a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80)
 }
 .review-content{
-  background:rgba(216,136,134,.5);
+  background:rgba(216,136,134,.7);
   height:100%;
   display:flex;
   justify-content:center;
   flex-direction:column;
-  font-family: 'PT Serif', serif;
+  font-family: 'Roboto';
 }
 .review-content h3{
   margin:0;
   font-size:2.7rem;
   font-style:italic;
+  font-family: 'PT Serif', serif;
 }
 .review-content button{
   text-transform:uppercase;
-  padding:10px 30px;
+  padding:5px 30px;
   border-radius:40px;
-  width:220px;
   margin:0 auto;
-  font-size:14px;
-  font-weight:500;
- font-family: 'PT Serif', serif;
+  margin-top: 10px;
+  font-size:12px;
+  font-weight:300;
+  font-family: "Roboto";
+  color: white;
+  outline: none;
+  background: none;
+  border: 1px solid white;
 }
 
 
@@ -194,11 +201,12 @@ body{
   padding:8px 15px;
   margin:0 20px;
   background-color:#f3bb01;
-  color:black;
-  border:none;
+  color:white;
+  border:1px solid white;
   margin-top:20px;
-  border-radius:10px;
+  border-radius:5px;
   font-size:15px;
+  outline:none;
 }
 .book-content-container button:hover{
   background-color:#cf4e28;
