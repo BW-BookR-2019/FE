@@ -6,8 +6,9 @@ import { TextField } from 'formik-material-ui';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Rating from './Rating'
-import { useSelector, useDispatch } from 'react-redux';
-import { getGoogleBookData } from '../actions';
+import { useSelector, useDispatch, connect } from 'react-redux';
+import { getGoogleBookData, addReview } from '../actions';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 const ReviewForm = (props) => {
   const id = props.match.params.id;
@@ -16,42 +17,28 @@ const ReviewForm = (props) => {
   const googleBookData = useSelector(state => state.googleBookData);
 
   useEffect(() => {
-    if (googleBookData.id !== id) {
+    if (googleBookData && googleBookData.id !== id) {
       dispatch(getGoogleBookData(id))
     }
   }, [])
 
-
-  const [review, setReview] = useState({user: '', review: '', rating: ''});
-
-  const handleChanges = e => {
-    setReview({...review, [e.target.name]: e.target.value})
-  }
-
-  const submitForm = e => {
-    e.preventDefault();
-    setReview({user: '', review: '', rating: ''})
-  }
-
   return(
     <>
-      <div className='review-form'>
+      {googleBookData && <div className='review-form'>
       <h2>Leave a review for: </h2>
-      <img src={googleBookData.imageLinks.small ||
-                googleBookData.imageLinks.thumbnail} alt="book cover"/>
-      <h3>{googleBookData.title}</h3>
-      {googleBookData.authors.map(item => (
+      <img src={googleBookData.volumeInfo.imageLinks.small ||
+                googleBookData.volumeInfo.imageLinks.thumbnail} alt="book cover"/>
+      <h3>{googleBookData.volumeInfo.title}</h3>
+      {googleBookData.volumeInfo.authors.map(item => (
         <p key={item}> By {item}</p>
       ))}
         <Rating />
-        <Form onSubmit={submitForm}>
+        <Form >
           <label className='username-container'>
             Username
             <Field
               type='text'
-              name='username'
-              value={review.username}
-              onChange={handleChanges}
+              name='user'
             />
           </label>
 
@@ -61,44 +48,43 @@ const ReviewForm = (props) => {
               component='textarea'
               type='text'
               name='review'
-              value={review.review}
-              onChange={handleChanges}
             />
           </label>
 
           <label className='accept-btn'>
-            <Link to={`/book-list/${id}`}><Button>Add Review</Button></Link>
+            <Button type="submit">Add Review</Button>
           </label>
 
           <label className='cancel-btn'>
             <Link to={`/book-list/${id}`}><Button>Cancel</Button></Link>
           </label>
         </Form>
-      </div>
+      </div>}
     </>
   )
 }
 
 const FormikReviewForm = withFormik({
-  mapPropsToValues({username, review, rating}
+  mapPropsToValues({user, review}
   ){
     return{
-      username: username || '',
+      user: user || '',
       review: review || '',
-      rating: rating || ''
+      // rating: rating || ''
     }
   },
   validationSchema: Yup.object().shape({
-    username: Yup.string()
-			.required('Username is required'),
+    user: Yup.string()
+			.required('User is required'),
 		review: Yup.string()
       .required('The review is required'),
-    rating: Yup.string()
-      .required('The rating is required'),
+    // rating: Yup.string()
+    //   .required('The rating is required'),
   }),
-  handleSubmit(values, {props}){
-
+  handleSubmit(values, { props }){
+    props.addReview({ ...values, id: Date.now(), rating: 1 });
+    props.history.push(`/book-list/${props.match.params.id}`);
   }
 })(ReviewForm);
 
-export default FormikReviewForm;
+export default connect(null, { addReview })(FormikReviewForm);

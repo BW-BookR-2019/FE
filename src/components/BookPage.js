@@ -22,7 +22,7 @@ function BookPage(props) {
 
   useEffect(() => {
     dispatch(getGoogleBookData(id));
-  }, [id]);
+  }, []);
 
   return (
     <div>
@@ -31,15 +31,15 @@ function BookPage(props) {
           <div className="book-cover">
             <img
               src={
-                googleBookData.imageLinks.small ||
-                googleBookData.imageLinks.thumbnail
+                googleBookData.volumeInfo.imageLinks.small ||
+                googleBookData.volumeInfo.imageLinks.thumbnail
               }
               alt="book cover"
             />
           </div>
           <div>
-            <h3>{googleBookData.title}</h3>
-            <h4>{googleBookData.subtitle}</h4>
+            <h3>{googleBookData.volumeInfo.title}</h3>
+            <h4>{googleBookData.volumeInfo.subtitle}</h4>
             <div>
               Ratings:{" "}
               <Ratings rating={5} widgetDimensions="15px" widgetSpacings="1px">
@@ -51,7 +51,7 @@ function BookPage(props) {
               </Ratings>
             </div>
             <div>
-              {googleBookData.authors.map(item => (
+              {googleBookData.volumeInfo.authors.map(item => (
                 <p key={item}> By {item}</p>
               ))}
             </div>
@@ -64,9 +64,9 @@ function BookPage(props) {
               <DeleteModal id={id} history={props.history} />
             </div>
             <div className="book-description">
-              {ReactHtmlParser(googleBookData.description)}
+              {ReactHtmlParser(googleBookData.volumeInfo.description)}
             </div>
-            <p>Publisher: {googleBookData.publisher}</p>
+            <p>Publisher: {googleBookData.volumeInfo.publisher}</p>
           </div>
         </div>
       )}
@@ -74,7 +74,7 @@ function BookPage(props) {
       <div className="review-section">
         <h2>Customer Reviews</h2>
         {reviews.map(item => (
-          <div className="review-section">
+          <div key={item.id} className="review-section">
             <h3 className="review-content-section">
               {item.user}{" "}
               <Ratings

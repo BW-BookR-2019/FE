@@ -96,21 +96,26 @@ export const logout = () => {
 
 export const ADD_REVIEW_SUCCESS = "ADD_REVIEW_SUCCESS";
 
-export const addReview = (id, history) => dispatch => {
-  console.log(`adding review...`);
-  // dispatch({ type: REQUEST_START });
-  // TODO: add axios POST request endpoint
-  // axiosWithAuth().post(`/post/endpoint/here/`)
-  //   .then(res => {
-  //     console.log(res)
-  //     dispatch({ type: ADD_REVIEW_SUCCESS })
-  //     history.push(`/book-list/${id}`)
-  //   })
-  //   .catch(err => {
-  //     console.log(err)
-  //     dispatch({ type: REQUEST_FAILURE, payload: err.response })
-  //   })
-};
+// export const addReview = (id, history, review) => dispatch => {
+//   console.log(`adding review...`);
+
+//   // dispatch({ type: REQUEST_START });
+//   // TODO: add axios POST request endpoint
+//   // axiosWithAuth().post(`/post/endpoint/here/`)
+//   //   .then(res => {
+//   //     console.log(res)
+//   //     dispatch({ type: ADD_REVIEW_SUCCESS, payload: { id: id, review: review} })
+//   //     history.push(`/book-list/${id}`)
+//   //   })
+//   //   .catch(err => {
+//   //     console.log(err)
+//   //     dispatch({ type: REQUEST_FAILURE, payload: err.response })
+//   //   })
+// };
+
+export const addReview = (review) => {
+  return ({ type: ADD_REVIEW_SUCCESS, payload: review })
+}
 
 export const GET_GOOGLE_BOOK_DATA_SUCCESS = "GET_GOOGLE_BOOK_DATA_SUCCESS";
 
@@ -127,7 +132,7 @@ export const getGoogleBookData = id => dispatch => {
       //   response.data.volumeInfo.imageLinks.small ||
       //     response.data.volumeInfo.imageLinks.thumbnail
       // );
-      dispatch({ type: GET_GOOGLE_BOOK_DATA_SUCCESS, payload: res.data.volumeInfo })
+      dispatch({ type: GET_GOOGLE_BOOK_DATA_SUCCESS, payload: { volumeInfo: res.data.volumeInfo, id: res.data.id } })
     })
     .catch(err => console.log(err))
 };
