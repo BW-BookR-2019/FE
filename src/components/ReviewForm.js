@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { withFormik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
@@ -9,7 +9,7 @@ import Rating from "./Rating";
 import { useSelector, useDispatch, connect } from "react-redux";
 import { getGoogleBookData, addReview } from "../actions";
 
-const ReviewForm = ({ match, touched, errors }) => {
+const ReviewForm = ({ match, touched, errors, formikProps, values, formikBag }) => {
   const id = match.params.id;
 
   const isFetching = useSelector(state => state.isFetching);
@@ -87,6 +87,8 @@ const ReviewForm = ({ match, touched, errors }) => {
     }
   }, []);
 
+  const [rating, setRating] = useState(1);
+
   return (
     <>
       {googleBookData && (
@@ -107,8 +109,10 @@ const ReviewForm = ({ match, touched, errors }) => {
             ))}
           </div>
           <div className="reviewformContainer" className={classes.form}>
-            <Form className={classes.formItems}>
-              <Rating />
+            <Form className={classes.formItems} onSubmit={() => {
+              formikProps.handleSubmit(values, formikBag, rating);
+            }}>
+              <Rating rating={rating} setRating={setRating} />
               <label
                 className="username-container"
                 className={classes.subcontainer}
@@ -196,9 +200,10 @@ const FormikReviewForm = withFormik({
     // rating: Yup.string()
     //   .required('The rating is required'),
   }),
-  handleSubmit(values, { props }) {
+  handleSubmit(values, { props }, rating) {
     console.log(`hitting form submit`);
-    props.addReview({ ...values, id: Date.now(), rating: 1 });
+    props.addReview({ ...values, rating: rating });
+    // resetForm();
     props.history.push(`/book-list/${props.match.params.id}`);
   }
 })(ReviewForm);
