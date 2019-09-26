@@ -7,65 +7,51 @@ import { TextField } from 'formik-material-ui';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Rating from './Rating'
-import clsx from 'clsx'
 
 const ReviewForm = ({match, touched, errors}) => {
   // STYLING
   const useStyles = makeStyles(() => ({
     container: {
       display: 'flex',
+      justifyContent: 'center',
       border: '2px solid #cf4e28',
-      // borderRadius: '1%',
-      margin: '0 auto',
-      width: '100%',
-      // padding: '3% 1% 1% 1%'
+      borderRadius: '1%',
+      margin: '1% auto',
+      width: '50%',
+      padding: '3%'
     },
     form: {
       display: 'flex',
       flexDirection: 'column',
-      border: '2px solid skyblue',
       width: '50%',
-      flexWrap: 'wrap',
-      justifyContent: 'space-between'
     },
     formItems: {
-      border: '2px solid white',
       display: 'flex',
-      flexDirection: 'column'
+      flexDirection: 'column',
+      marginTop: '20%'
     },
     bookinfo: {
-      border: '2px solid yellow',
       width: '50%'
     },
     buttonContainer: {
-      border: '2px solid pink',
       display: 'flex',
-      alignContent: 'flex-end',
-      justifyContent: 'flex-end'
+      alignItems: 'flex-end',
+      justifyContent: 'flex-end',
     },
     subcontainer: {
       display: 'flex',
-  //     justifyContent: 'center',
       flexDirection: 'column',
-  //     textAlign: 'left',
-  //     width: '60%',
-  //     margin: '1% auto',
     },
-  //   link: {
-  //     textDecoration: 'none',
-  //     color: 'white',
-  //     transition: '0.5s',
-  //     '&:hover': {
-  //       color: '#edb901',
-  //       transition: '0.3s'
-  //     }
-  //   },
+    link: {
+      textDecoration: 'none',
+      color: 'white',
+    },
     btn: {
       textTransform: 'lowercase',
       color: 'white',
       borderColor: 'white',
       backgroundColor: '#edb901',
-      width: '50%',
+      marginRight: '2%',
       '&:hover': {
         backgroundColor: '#cf4e28',
         transition: '0.3s'
@@ -164,7 +150,7 @@ const ReviewForm = ({match, touched, errors}) => {
                 multiline={true}
                 rows={10}
                 rowsMax={10}
-                helperText={(touched.username && errors.username) && errors.username}
+                helperText={(touched.review && errors.review) && errors.review}
                 InputProps={{
                   classes: {
                     root: classes.inputOutline,
@@ -176,10 +162,8 @@ const ReviewForm = ({match, touched, errors}) => {
             </label>  
           </Form>
           <div className={classes.buttonContainer}>
-            <label className='buttons'>
-              <Link className={classes.link} to={`/book-list/${id}`}><Button className={classes.btn} variant='outlined' size='medium' type='submit'>add review</Button></Link>
-              <Link className={classes.link} to={`/book-list/${id}`}><Button className={classes.btn} variant='outlined' size='medium' type='submit'>cancel</Button></Link>
-            </label>
+              <Button className={classes.btn} variant='outlined' size='medium' type='submit'>add review</Button>
+              <Link className={classes.link} to={`/book-list/${id}`}><Button className={classes.btn} variant='outlined' size='medium'>cancel</Button></Link>
           </div>
         </div>
       </div>
@@ -188,21 +172,18 @@ const ReviewForm = ({match, touched, errors}) => {
 }
 
 const FormikReviewForm = withFormik({
-  mapPropsToValues({username, review, rating}
-  ){
+  mapPropsToValues({username, review}
+  ) {
     return{
       username: username || '',
       review: review || '',
-      rating: rating || ''
     }
   },
   validationSchema: Yup.object().shape({
     username: Yup.string()
-			.required('Username is required'),
+			.required('username is required'),
 		review: Yup.string()
-      .required('The review is required'),
-    rating: Yup.string()
-      .required('The rating is required'),
+      .required('the review is required'),
   }),
   handleSubmit(values, {props}){
 
