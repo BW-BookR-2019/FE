@@ -7,6 +7,7 @@ import * as Yup from 'yup';
 import { TextField } from 'formik-material-ui';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import NavLogo from "../navlogo.png";
 
 
 const Login = ({touched, errors}) => {
@@ -17,7 +18,7 @@ const Login = ({touched, errors}) => {
 		container: {
 			display: 'flex',
 			flexDirection: 'column',
-			border: '2px solid #cf4e28',
+			border: '2px solid #f3bb01',
 			borderRadius: '1%',
 			margin: '8% auto',
 			width: '30%',
@@ -47,8 +48,7 @@ const Login = ({touched, errors}) => {
 		btn: {
 			textTransform: 'lowercase',
 			color: 'white',
-			borderColor: 'white',
-			backgroundColor: '#edb901',
+			backgroundColor: '#f3bb01',
 			'&:hover': {
 				backgroundColor: '#cf4e28',
 				transition: '0.3s'
@@ -74,6 +74,7 @@ const Login = ({touched, errors}) => {
 		<>
 			<div className='login-form'>
 				<Form className={classes.container}>
+				  <img src={NavLogo} alt="logo" className="login-logo" />
 					<label className='name-container' className={classes.subcontainer}>
 						username 
 						<Field

@@ -14,7 +14,7 @@ const Navigation = props => {
   return (
     <>
       <div className="nav">
-        <img className="logo" src={NavLogo} />
+        <NavLink exact to="/book-list"><img className="logo" src={NavLogo} /></NavLink>
         <div className="nav-links">
           <NavLink to="/book-list">Book List</NavLink>
           <NavLink to="/login" onClick={() => dispatch(logout())}>
