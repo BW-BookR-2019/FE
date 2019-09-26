@@ -8,10 +8,11 @@ import { TextField } from 'formik-material-ui';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import NavLogo from "../navlogo.png";
+import { CircleSpinner } from "react-spinners-kit";
 
 
 const Login = ({touched, errors}) => {
-  const isFetching = useSelector(state => state.isFetching);
+	const isFetching = useSelector(state => state.isFetching);
 
 	// STYLING
 	const useStyles = makeStyles(() => ({
@@ -69,6 +70,16 @@ const Login = ({touched, errors}) => {
 
 	// BUILDING FORM
 	const classes = useStyles();
+
+	if(isFetching === true) 
+		return(
+			<div style={{width: '8%', position: 'absolute', top: '50%', left: '46%'}}>
+      <CircleSpinner
+      size={50}
+      color="#f3bb01"
+      />
+    	</div>
+		)
 
   return(
 		<>
