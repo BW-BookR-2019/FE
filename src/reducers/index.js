@@ -67,11 +67,21 @@ export const reducer = (state = initialState, action) => {
         isFetching: false,
         isLoggedIn: true
       };
+    case LOGIN_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+      }
     case REGISTER_SUCCESS:
       return {
         ...state,
         isFetching: false
       };
+    case REGISTER_FAILURE:
+        return {
+          ...state,
+          isFetching: false,
+        }
     case LOGOUT:
       return {
         ...state,

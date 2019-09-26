@@ -11,8 +11,7 @@ export const login = (credentials, history) => dispatch => {
   dispatch({ type: REQUEST_START });
   axios
     .post(
-      "https://ks-starthere.herokuapp.com/oauth/token",
-      // "https://realwillbrooks-bookr.herokuapp.com/login",
+      "https://realwillbrooks-bookr.herokuapp.com/login",
       `grant_type=password&username=${credentials.username}&password=${credentials.password}`,
       {
         headers: {
@@ -26,15 +25,11 @@ export const login = (credentials, history) => dispatch => {
       localStorage.setItem("token", res.data.access_token);
       dispatch({ type: LOGIN_SUCCESS });
       history.push("/book-list");
-      // return axiosWithAuth().get(`/users/user/name/lambda`)
     })
-    // .then(res => {
-    //   console.log(res)
-    // })
     .catch(err => {
       console.log(err.response);
       // TODO: add error handling
-      // dispatch({ type: LOGIN_FAILURE })
+      dispatch({ type: LOGIN_FAILURE })
     });
 };
 
@@ -44,8 +39,7 @@ export const REGISTER_FAILURE = "REGISTER_FAILURE";
 export const register = (credentials, history) => dispatch => {
   dispatch({ type: REQUEST_START });
   axios
-    .post("https://ks-starthere.herokuapp.com/createnewuser", credentials)
-    // .post('https://realwillbrooks-bookr.herokuapp.com/createnewuser', credentials)
+    .post('https://realwillbrooks-bookr.herokuapp.com/createnewuser', credentials)
     .then(res => {
       dispatch({ type: REGISTER_SUCCESS });
       history.push("/login");
@@ -54,7 +48,7 @@ export const register = (credentials, history) => dispatch => {
     .catch(err => {
       console.log(err.response);
       // TODO: add error handling
-      // dispatch({ type: REGISTER_FAILURE })
+      dispatch({ type: REGISTER_FAILURE })
     });
 };
 
