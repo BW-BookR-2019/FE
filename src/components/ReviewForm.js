@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { withFormik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
@@ -8,7 +8,6 @@ import Button from "@material-ui/core/Button";
 import Rating from "./Rating";
 import { useSelector, useDispatch, connect } from "react-redux";
 import { getGoogleBookData, addReview } from "../actions";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const ReviewForm = ({ match, touched, errors }) => {
   const id = match.params.id;
@@ -154,26 +153,26 @@ const ReviewForm = ({ match, touched, errors }) => {
                   }}
                 />
               </label>
-            </Form>
-            <div className={classes.buttonContainer}>
-              <Button
-                className={classes.btn}
-                variant="outlined"
-                size="medium"
-                type="submit"
-              >
-                add review
-              </Button>
-              <Link className={classes.link} to={`/book-list/${id}`}>
+              <div className={classes.buttonContainer}>
                 <Button
                   className={classes.btn}
                   variant="outlined"
                   size="medium"
+                  type="submit"
                 >
-                  cancel
+                  add review
                 </Button>
-              </Link>
-            </div>
+                <Link className={classes.link} to={`/book-list/${id}`}>
+                  <Button
+                    className={classes.btn}
+                    variant="outlined"
+                    size="medium"
+                  >
+                    cancel
+                  </Button>
+                </Link>
+              </div>
+            </Form>
           </div>
         </div>
       )}
@@ -196,6 +195,7 @@ const FormikReviewForm = withFormik({
     //   .required('The rating is required'),
   }),
   handleSubmit(values, { props }) {
+    console.log(`hitting form submit`);
     props.addReview({ ...values, id: Date.now(), rating: 1 });
     props.history.push(`/book-list/${props.match.params.id}`);
   }
