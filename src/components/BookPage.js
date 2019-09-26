@@ -4,7 +4,7 @@ import ReactHtmlParser from "react-html-parser";
 import Ratings from "react-ratings-declarative";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getGoogleBookData } from '../actions';
+import { getGoogleBookData } from "../actions";
 
 import DeleteModal from "./DeleteModal";
 
@@ -12,7 +12,7 @@ function BookPage(props) {
   // Uncomment when backend endpoints are up
   // const bookData = useSelector(state => state.bookList.find(book => book.id === props.match.params.id));
 
-  const reviews = useSelector(state => state.dummyReviews)
+  const reviews = useSelector(state => state.dummyReviews);
 
   // * Grabbing dynamic URL id
   const id = props.match.params.id;
@@ -21,50 +21,55 @@ function BookPage(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getGoogleBookData(id))
+    dispatch(getGoogleBookData(id));
   }, [id]);
 
   return (
     <div>
-      {googleBookData && 
-      <div className="book-content-container">
-        <div className="book-cover">
-          <img src={googleBookData.imageLinks.small || googleBookData.imageLinks.thumbnail} alt="book cover" />
-        </div>
-        <div>
-          <h3>{googleBookData.title}</h3>
-          <h4>{googleBookData.subtitle}</h4>
-          <div>
-            Ratings:{" "}
-            <Ratings rating={5} widgetDimensions="15px" widgetSpacings="1px">
-              <Ratings.Widget widgetRatedColor="#f3bb01" />
-              <Ratings.Widget widgetRatedColor="#f3bb01" />
-              <Ratings.Widget widgetRatedColor="#f3bb01" />
-              <Ratings.Widget widgetRatedColor="#f3bb01" />
-              <Ratings.Widget widgetRatedColor="#f3bb01" />
-            </Ratings>
+      {googleBookData && (
+        <div className="book-content-container">
+          <div className="book-cover">
+            <img
+              src={
+                googleBookData.imageLinks.small ||
+                googleBookData.imageLinks.thumbnail
+              }
+              alt="book cover"
+            />
           </div>
           <div>
-            {googleBookData.authors.map(item => (
-              <p key={item}> By {item}</p>
-            ))}
+            <h3>{googleBookData.title}</h3>
+            <h4>{googleBookData.subtitle}</h4>
+            <div>
+              Ratings:{" "}
+              <Ratings rating={5} widgetDimensions="15px" widgetSpacings="1px">
+                <Ratings.Widget widgetRatedColor="#f3bb01" />
+                <Ratings.Widget widgetRatedColor="#f3bb01" />
+                <Ratings.Widget widgetRatedColor="#f3bb01" />
+                <Ratings.Widget widgetRatedColor="#f3bb01" />
+                <Ratings.Widget widgetRatedColor="#f3bb01" />
+              </Ratings>
+            </div>
+            <div>
+              {googleBookData.authors.map(item => (
+                <p key={item}> By {item}</p>
+              ))}
+            </div>
+            <div className="book-buttons">
+              <button>Add To My Books</button>
+              <button>Purchase</button>
+              <Link to={`/book-list/${id}/add-review`}>
+                <button>Add a Review</button>
+              </Link>
+              <DeleteModal id={id} history={props.history} />
+            </div>
+            <div className="book-description">
+              {ReactHtmlParser(googleBookData.description)}
+            </div>
+            <p>Publisher: {googleBookData.publisher}</p>
           </div>
-          <div className="book-buttons">
-            <button>Add To My Books</button>
-            <button>Purchase</button>
-            <button>
-              <Link
-                to={`/book-list/${id}/add-review`}
-              ></Link>
-              Add a Review
-            </button>
-            <DeleteModal id={id} history={props.history} />
-          </div>
-          <div className="book-description">{ReactHtmlParser(googleBookData.description)}</div>
-          <p>Publisher: {googleBookData.publisher}</p>
         </div>
-      </div>
-      }
+      )}
 
       <div className="review-section">
         <h2>Customer Reviews</h2>
