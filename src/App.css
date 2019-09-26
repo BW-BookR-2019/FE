@@ -7,11 +7,12 @@ body{
 
 .nav{
   background-color:#f3bb01;
-  height:30px;
+  height:60px;
   padding:5px;
   margin-bottom:30px;
   display:flex;
   justify-content:space-between;
+  align-items:center;
 }
 
 .nav a{
@@ -27,7 +28,8 @@ body{
 }
 
 .logo{
-  height:30px;
+  height:60px;
+  padding:5px 0;
 }
 
 /* * General styling for entire form */
@@ -219,4 +221,11 @@ body{
 }
 .review-content-section{
   margin:0;
+}
+.login-logo{
+  height:50%;
+  width:50%;
+  display:flex;
+  margin:0 auto;
+  margin-bottom:10px;
 }
