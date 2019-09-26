@@ -54,7 +54,6 @@ function BookPage(props) {
             <button>Purchase</button>
             <button>
               <Link
-                style={{ color: "white", textDecoration: "none" }}
                 to={`/book-list/${id}/add-review`}
               ></Link>
               Add a Review
