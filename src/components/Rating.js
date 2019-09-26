@@ -21,6 +21,8 @@ class Rating extends React.Component {
     return (                
       <div>
         <StarRatingComponent 
+          emptyStarColor={'#fff'}
+          starColor={'#edb901'}
           name="rate1" 
           starCount={5}
           value={rating}

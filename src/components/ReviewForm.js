@@ -8,8 +8,71 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Rating from './Rating'
 
-const ReviewForm = (props) => {
-  let id = props.match.params.id
+const ReviewForm = ({match, touched, errors}) => {
+  // STYLING
+  const useStyles = makeStyles(() => ({
+    container: {
+      display: 'flex',
+      justifyContent: 'center',
+      border: '2px solid #cf4e28',
+      borderRadius: '1%',
+      margin: '1% auto',
+      width: '50%',
+      padding: '3%'
+    },
+    form: {
+      display: 'flex',
+      flexDirection: 'column',
+      width: '50%',
+    },
+    formItems: {
+      display: 'flex',
+      flexDirection: 'column',
+      marginTop: '20%'
+    },
+    bookinfo: {
+      width: '50%'
+    },
+    buttonContainer: {
+      display: 'flex',
+      alignItems: 'flex-end',
+      justifyContent: 'flex-end',
+    },
+    subcontainer: {
+      display: 'flex',
+      flexDirection: 'column',
+    },
+    link: {
+      textDecoration: 'none',
+      color: 'white',
+    },
+    btn: {
+      textTransform: 'lowercase',
+      color: 'white',
+      borderColor: 'white',
+      backgroundColor: '#edb901',
+      marginRight: '2%',
+      '&:hover': {
+        backgroundColor: '#cf4e28',
+        transition: '0.3s'
+      }
+    },
+    inputOutline: {
+      backgroundColor: 'white',
+      borderRadius: '0.25rem',
+      '&$focusedOutline $notchedOutline' : {
+        borderColor: '#cf4e28 !important'
+      },
+    },
+    focusedOutline: {},
+    notchedOutline: {
+      border: '2px solid #edb901',
+    }
+  }))
+
+// BUILDING FORM
+  const classes = useStyles();
+  let id = match.params.id
 
   const [bookData, setBookData] = useState([])
   const [bookAuthor, setBookAuthor] = useState([])
@@ -40,65 +103,87 @@ const ReviewForm = (props) => {
 
   return(
     <>
-      <div className='review-form'>
-      <h2>Leave a review for: </h2>
-      <img src={bookCover} alt="book cover"/>
-      <h3>{bookData.title}</h3>
-      {bookAuthor.map(item => (
-        <p key={item}> By {item}</p>
-      ))}
-        <Rating />
-        <Form onSubmit={submitForm}>
-          <label className='username-container'>
-            Username
-            <Field
-              type='text'
-              name='username'
-              value={review.username}
-              onChange={handleChanges}
-            />
-          </label>
+      <div className='review-form' className={classes.container}>
+        <div className={classes.bookinfo}>
+          <h2>Leave a review for: </h2>
+          <img src={bookCover} className={classes.book} alt="book cover"/>
+          <h3>{bookData.title}</h3>
+          {bookAuthor.map(item => (
+          <p key={item}> By {item}</p>
+          ))}
+        </div>
 
-          <label className='review-container'>
-            Review
-            <Field
-              component='textarea'
-              type='text'
-              name='review'
-              value={review.review}
-              onChange={handleChanges}
-            />
-          </label>
+        <div className='reviewformContainer' className={classes.form}>
+          <Form className={classes.formItems} onSubmit={submitForm}>
+          <Rating />
+            <label className='username-container' className={classes.subcontainer}>
+              username
+              <Field
+                type='text'
+                name='username'
+                value={review.username}
+                onChange={handleChanges}
+                component={TextField}
+                variant="outlined"
+                margin='dense'
+                helperText={(touched.username && errors.username) && errors.username}
+                InputProps={{
+                  classes: {
+                    root: classes.inputOutline,
+                    focused: classes.focusedOutline,
+                    notchedOutline: classes.notchedOutline
+                  }
+                }}
+              />
+            </label>
 
-          <label className='accept-btn'>
-            <Link to={`/book-list/${id}`}><Button>Add Review</Button></Link>
-          </label>
-
-          <label className='cancel-btn'>
-            <Link to={`/book-list/${id}`}><Button>Cancel</Button></Link>
-          </label>
-        </Form>
+            <label className='review-container' className={classes.subcontainer}>
+              review
+              <Field
+                type='text'
+                name='review'
+                value={review.review}
+                onChange={handleChanges}
+                component={TextField}
+                variant="outlined"
+                margin='dense'
+                multiline={true}
+                rows={10}
+                rowsMax={10}
+                helperText={(touched.review && errors.review) && errors.review}
+                InputProps={{
+                  classes: {
+                    root: classes.inputOutline,
+                    focused: classes.focusedOutline,
+                    notchedOutline: classes.notchedOutline
+                  }
+                }}
+              />
+            </label>  
+          </Form>
+          <div className={classes.buttonContainer}>
+              <Button className={classes.btn} variant='outlined' size='medium' type='submit'>add review</Button>
+              <Link className={classes.link} to={`/book-list/${id}`}><Button className={classes.btn} variant='outlined' size='medium'>cancel</Button></Link>
+          </div>
+        </div>
       </div>
     </>
   )
 }
 
 const FormikReviewForm = withFormik({
-  mapPropsToValues({username, review, rating}
-  ){
+  mapPropsToValues({username, review}
+  ) {
     return{
       username: username || '',
       review: review || '',
-      rating: rating || ''
     }
   },
   validationSchema: Yup.object().shape({
     username: Yup.string()
-			.required('Username is required'),
+			.required('username is required'),
 		review: Yup.string()
-      .required('The review is required'),
-    rating: Yup.string()
-      .required('The rating is required'),
+      .required('the review is required'),
   }),
   handleSubmit(values, {props}){
 
