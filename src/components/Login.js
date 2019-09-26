@@ -7,10 +7,11 @@ import * as Yup from 'yup';
 import { TextField } from 'formik-material-ui';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import { PushSpinner } from "react-spinners-kit";
 
 
 const Login = ({touched, errors}) => {
-  const isFetching = useSelector(state => state.isFetching);
+	const isFetching = useSelector(state => state.isFetching);
 
 	// STYLING
 	const useStyles = makeStyles(() => ({
@@ -69,6 +70,17 @@ const Login = ({touched, errors}) => {
 
 	// BUILDING FORM
 	const classes = useStyles();
+
+	
+	if(isFetching === true) 
+		return(
+			<PushSpinner
+			style={{margin: '0 auto'}}
+			size={30}
+			color="#686769"
+			// loading={loading}
+		/>
+		)
 
   return(
 		<>

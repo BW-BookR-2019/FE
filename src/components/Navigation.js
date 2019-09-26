@@ -9,6 +9,8 @@ import BookPage from "../components/BookPage";
 import ReviewForm from "../components/ReviewForm";
 import NavLogo from "../navlogo.png";
 
+import Loader from '../Loader'
+
 const Navigation = props => {
   const dispatch = useDispatch();
   return (
@@ -22,10 +24,11 @@ const Navigation = props => {
           </NavLink>
         </div>
       </div>
+      <Route exact path ='/' component={Loader}></Route>
       <PrivateRoute exact path='/book-list' component={BookList} />
       <PrivateRoute exact path='/book-list/:id' component={BookPage} />
       <PrivateRoute exact path='/book-list/:id/add-review' component={ReviewForm} />
-      {props.location.pathname === '/' && <Redirect from="/" to="/book-list" />}
+      {/* {props.location.pathname === '/' && <Redirect from="/" to="/book-list" />} */}
     </>
   );
 };
