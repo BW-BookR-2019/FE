@@ -82,7 +82,7 @@ const ReviewForm = ({ match, touched, errors }) => {
   const googleBookData = useSelector(state => state.googleBookData);
 
   useEffect(() => {
-    if (googleBookData && googleBookData.id !== id) {
+    if (!googleBookData || googleBookData.id !== id) {
       dispatch(getGoogleBookData(id));
     }
   }, []);
