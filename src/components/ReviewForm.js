@@ -12,6 +12,8 @@ import { getGoogleBookData, addReview } from "../actions";
 const ReviewForm = ({ match, touched, errors }) => {
   const id = match.params.id;
 
+  const isFetching = useSelector(state => state.isFetching);
+
   // STYLING
   const useStyles = makeStyles(() => ({
     container: {
@@ -80,7 +82,7 @@ const ReviewForm = ({ match, touched, errors }) => {
   const googleBookData = useSelector(state => state.googleBookData);
 
   useEffect(() => {
-    if (googleBookData && googleBookData.id !== id) {
+    if (!googleBookData || googleBookData.id !== id) {
       dispatch(getGoogleBookData(id));
     }
   }, []);

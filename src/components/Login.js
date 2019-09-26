@@ -1,7 +1,7 @@
 import React from 'react';
 import { withFormik, Form, Field } from 'formik';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { login } from '../actions';
 import * as Yup from 'yup';
 import { TextField } from 'formik-material-ui';
@@ -10,6 +10,8 @@ import Button from '@material-ui/core/Button';
 
 
 const Login = ({touched, errors}) => {
+  const isFetching = useSelector(state => state.isFetching);
+
 	// STYLING
 	const useStyles = makeStyles(() => ({
 		container: {

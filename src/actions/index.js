@@ -25,7 +25,11 @@ export const login = (credentials, history) => dispatch => {
       localStorage.setItem("token", res.data.access_token);
       dispatch({ type: LOGIN_SUCCESS });
       history.push("/book-list");
+      // return axiosWithAuth().get(`/users/user/name/lambda`)
     })
+    // .then(res => {
+    //   console.log(res)
+    // })
     .catch(err => {
       console.log(err.response);
       // TODO: add error handling

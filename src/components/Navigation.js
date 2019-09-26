@@ -9,7 +9,7 @@ import BookPage from "../components/BookPage";
 import ReviewForm from "../components/ReviewForm";
 import NavLogo from "../navlogo.png";
 
-const Navigation = () => {
+const Navigation = props => {
   const dispatch = useDispatch();
   return (
     <>
@@ -25,7 +25,7 @@ const Navigation = () => {
       <PrivateRoute exact path='/book-list' component={BookList} />
       <PrivateRoute exact path='/book-list/:id' component={BookPage} />
       <PrivateRoute exact path='/book-list/:id/add-review' component={ReviewForm} />
-      <Redirect from="/" to="/book-list" />
+      {props.location.pathname === '/' && <Redirect from="/" to="/book-list" />}
     </>
   );
 };

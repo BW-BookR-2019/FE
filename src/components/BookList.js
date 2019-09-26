@@ -14,6 +14,8 @@ function BookList(props) {
   //   dispatch(getBookList());
   // }, []);
 
+  const isFetching = useSelector(state => state.isFetching);
+
   // * State for book data after search
   const [bookData, setBookData] = useState([]);
 

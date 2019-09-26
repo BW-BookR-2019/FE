@@ -12,6 +12,8 @@ function BookPage(props) {
   // Uncomment when backend endpoints are up
   // const bookData = useSelector(state => state.bookList.find(book => book.id === props.match.params.id));
 
+  const isFetching = useSelector(state => state.isFetching);
+
   const reviews = useSelector(state => state.dummyReviews);
 
   // * Grabbing dynamic URL id
