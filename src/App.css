@@ -7,7 +7,7 @@ body{
 
 .nav{
   background-color:#f3bb01;
-  height:60px;
+  height:35px;
   padding:5px;
   margin-bottom:30px;
   display:flex;
@@ -28,7 +28,7 @@ body{
 }
 
 .logo{
-  height:60px;
+  height:35px;
   padding:5px 0;
 }
 
