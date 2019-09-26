@@ -1,7 +1,7 @@
 import React from 'react';
 import { withFormik, Form, Field } from 'formik';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { register } from '../actions';
 import * as Yup from 'yup';
 // WAS HAVING ISSUES WITH GETTING YUP TO WORK WITH MATERIAL UI SINCE YOU CHANGE FORMIK'S 'FIELD' TO MATERIAL UI'S 'TEXTFIELD'
@@ -12,6 +12,8 @@ import Button from '@material-ui/core/Button';
 
 
 const Register = ({touched, errors}) => {
+  const isFetching = useSelector(state => state.isFetching);
+
 	// STYLING
 	const useStyles = makeStyles(() => ({
 		container: {

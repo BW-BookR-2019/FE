@@ -12,6 +12,8 @@ import { getGoogleBookData, addReview } from "../actions";
 const ReviewForm = ({ match, touched, errors }) => {
   const id = match.params.id;
 
+  const isFetching = useSelector(state => state.isFetching);
+
   // STYLING
   const useStyles = makeStyles(() => ({
     container: {

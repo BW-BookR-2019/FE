@@ -18,6 +18,8 @@ const initialState = {
   isFetching: false,
   error: null,
   isLoggedIn: false,
+  user: null,
+  reviews: null,
   dummyReviews: [
     {
       user: " Maria R.",
