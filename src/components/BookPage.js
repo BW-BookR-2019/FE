@@ -26,10 +26,6 @@ function BookPage(props) {
     dispatch(getGoogleBookData(id));
   }, []);
 
-  const callAddReview = () => {
-    dispatch(addReview());
-  }
-
   return (
     <div>
       {googleBookData && (

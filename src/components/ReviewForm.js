@@ -7,9 +7,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Rating from "./Rating";
 import { useSelector, useDispatch, connect } from "react-redux";
-import { getGoogleBookData, addReview } from "../actions";
+import { getGoogleBookData, addReview, setRating } from "../actions";
 
-const ReviewForm = ({ match, touched, errors, formikProps, values, formikBag }) => {
+const ReviewForm = ({ match, touched, errors, rating, setRating }) => {
   const id = match.params.id;
 
   const isFetching = useSelector(state => state.isFetching);
@@ -87,7 +87,7 @@ const ReviewForm = ({ match, touched, errors, formikProps, values, formikBag }) 
     }
   }, []);
 
-  const [rating, setRating] = useState(1);
+  // const [rating, setRating] = useState(1);
 
   return (
     <>
@@ -109,9 +109,7 @@ const ReviewForm = ({ match, touched, errors, formikProps, values, formikBag }) 
             ))}
           </div>
           <div className="reviewformContainer" className={classes.form}>
-            <Form className={classes.formItems} onSubmit={() => {
-              formikProps.handleSubmit(values, formikBag, rating);
-            }}>
+            <Form className={classes.formItems}>
               <Rating rating={rating} setRating={setRating} />
               <label
                 className="username-container"
@@ -191,24 +189,27 @@ const FormikReviewForm = withFormik({
     return {
       user: user || "",
       review: review || ""
-      // rating: rating || ''
     };
   },
   validationSchema: Yup.object().shape({
     user: Yup.string().required("User is required"),
     review: Yup.string().required("The review is required")
-    // rating: Yup.string()
-    //   .required('The rating is required'),
   }),
-  handleSubmit(values, { props }, rating) {
+  handleSubmit(values, { props }) {
     console.log(`hitting form submit`);
-    props.addReview({ ...values, rating: rating });
-    // resetForm();
+    console.log(props.rating)
+    props.addReview({ ...values, rating: props.rating });
     props.history.push(`/book-list/${props.match.params.id}`);
   }
 })(ReviewForm);
 
+const mapStateToProps = state => {
+  return {
+    rating: state.rating
+  }
+}
+
 export default connect(
-  null,
-  { addReview }
+  mapStateToProps,
+  { addReview, setRating }
 )(FormikReviewForm);
