@@ -102,11 +102,16 @@ export const ADD_REVIEW_SUCCESS = "ADD_REVIEW_SUCCESS";
 
 //   // dispatch({ type: REQUEST_START });
 //   // TODO: add axios POST request endpoint
-//   axiosWithAuth().post(`/review/review`, review)
+//   // axiosWithAuth().post(`/review/review`, review)
+//   axiosWithAuth().get('/users/user/name/blue')
 //     .then(res => {
 //       console.log(res)
 //       // dispatch({ type: ADD_REVIEW_SUCCESS, payload: { id: id, review: review} })
 //       // history.push(`/book-list/${id}`)
+//       return axiosWithAuth().post('/review/review', {...review, user: res.data})
+//     })
+//     .then(res => {
+//       console.log(res)
 //     })
 //     .catch(err => {
 //       console.log(err.response)
