@@ -16,7 +16,9 @@ function BookPage(props) {
 
   const isFetching = useSelector(state => state.isFetching);
 
-  const reviews = useSelector(state => state.dummyReviews);
+  const reviews = useSelector(state => state.reviews);
+
+  // const reviews = useSelector(state => state.dummyReviews);
 
   // * Grabbing dynamic URL id
   const id = props.match.params.id;
@@ -88,25 +90,27 @@ function BookPage(props) {
 
       <div className="review-section">
         <h2>Customer Reviews</h2>
-        {reviews.map(item => (
-          <div key={item.id} className="review-section">
-            <h3 className="review-content-section">
-              {item.user}{" "}
-              <Ratings
-                rating={item.rating}
-                widgetDimensions="12px"
-                widgetSpacings="1px"
-              >
-                <Ratings.Widget widgetRatedColor="#f3bb01" />
-                <Ratings.Widget widgetRatedColor="#f3bb01" />
-                <Ratings.Widget widgetRatedColor="#f3bb01" />
-                <Ratings.Widget widgetRatedColor="#f3bb01" />
-                <Ratings.Widget widgetRatedColor="#f3bb01" />
-              </Ratings>
-            </h3>
-            <p>"{item.review}"</p>
-          </div>
-        ))}
+        {reviews.length > 0 && reviews.map(item => {
+          if (item.id === id) {
+            return (<div key={item.id} className="review-section">
+              <h3 className="review-content-section">
+                {item.user}{" "}
+                <Ratings
+                  rating={item.rating}
+                  widgetDimensions="12px"
+                  widgetSpacings="1px"
+                >
+                  <Ratings.Widget widgetRatedColor="#f3bb01" />
+                  <Ratings.Widget widgetRatedColor="#f3bb01" />
+                  <Ratings.Widget widgetRatedColor="#f3bb01" />
+                  <Ratings.Widget widgetRatedColor="#f3bb01" />
+                  <Ratings.Widget widgetRatedColor="#f3bb01" />
+                </Ratings>
+              </h3>
+              <p>"{item.review}"</p>
+            </div>)
+          }
+        })}
         {/* Uncomment when backend endpoints are up */}
         {/* {bookData.reviews.map(item => (
           <div className="review-section">

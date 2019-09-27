@@ -202,7 +202,7 @@ const FormikReviewForm = withFormik({
   handleSubmit(values, { props }) {
     console.log(`hitting form submit`);
     console.log(props.rating)
-    props.addReview({ ...values, rating: props.rating });
+    props.addReview({ ...values, rating: props.rating, id: props.match.params.id });
     props.history.push(`/book-list/${props.match.params.id}`);
   }
 })(ReviewForm);

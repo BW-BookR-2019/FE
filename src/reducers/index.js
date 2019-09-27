@@ -23,6 +23,7 @@ const initialState = {
   user: null,
   reviews: null,
   rating: 1,
+  reviews: [],
   dummyReviews: [
     {
       user: " Maria R.",
@@ -117,8 +118,12 @@ export const reducer = (state = initialState, action) => {
     // };
       return {
         ...state,
-        dummyReviews: [
-          ...state.dummyReviews,
+        // dummyReviews: [
+        //   ...state.dummyReviews,
+        //   action.payload
+        // ]
+        reviews: [
+          ...state.reviews,
           action.payload
         ]
       }
