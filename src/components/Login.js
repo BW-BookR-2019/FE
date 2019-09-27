@@ -154,8 +154,9 @@ const FormikLogin = withFormik({
 		password: Yup.string()
 			.required('Password is required')
 	}),
-	handleSubmit(values, { props }){
-		props.login(values, props.history);
+	handleSubmit(values, { props, resetForm }){
+    props.login(values, props.history);
+    resetForm();
 	}
 })(Login);
 
